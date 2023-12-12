@@ -18,29 +18,31 @@ void moveGoldens(
     testFolderPath = testFolderPath.substring(1);
   }
 
-  final goldenPath = p.join(testFolderPath, 'goldens', dirName);
-  final outputPath = p.join('assets_dev', dirName);
+  final goldenPath = p.join(testFolderPath, 'goldens');
+  final sourcePath = p.join(goldenPath, dirName);
+  final targetPath = p.join('assets_dev', dirName);
 
   // create output folder if necessary
-  if (!Directory(outputPath).existsSync()) {
-    Directory(outputPath).createSync(recursive: true);
+  if (!Directory(targetPath).existsSync()) {
+    Directory(targetPath).createSync(recursive: true);
   }
 
   if (replaceAllFiles) {
     // delete target folder if needed
-    if (Directory(outputPath).existsSync()) {
-      Directory(outputPath).deleteSync(recursive: true);
+    if (Directory(targetPath).existsSync()) {
+      Directory(targetPath).deleteSync(recursive: true);
     }
 
-    Directory(goldenPath).renameSync(outputPath);
+    Directory(sourcePath).renameSync(targetPath);
   } else {
-    for (final file in filesForDir(Directory(goldenPath))) {
-      final newPath = file.path.replaceAll(goldenPath, outputPath);
+    for (final file in filesForDir(Directory(sourcePath))) {
+      final newPath = file.path.replaceAll(sourcePath, targetPath);
 
       file.copySync(newPath);
       file.deleteSync();
     }
   }
+  Directory(goldenPath).deleteSync(recursive: true);
 }
 
 @visibleForTesting
