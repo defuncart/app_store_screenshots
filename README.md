@@ -18,6 +18,8 @@ app_store_screenshots:
     git: https://github.com/defuncart/app_store_screenshots
 ```
 
+### Screenshots
+
 Add `test/app_store_screenshots/generate_screenshots_test.dart`
 
 ```dart
@@ -79,6 +81,39 @@ dart run app_store_screenshots:screenshots
 Screenshots can bee found in `assets_dev/screenshots`.
 
 See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/test/app_store_screenshots/generate_screenshots_test.dart) for full example.
+
+### App Icon
+
+Given an `AppIcon` widget, `generateAppIcon` and `generateAppIconAndroidForeground` can be used to generated 512x512 app icons and android foreground:
+
+<table>
+<tr><td>
+
+```dart
+generateAppIcon(
+  onBuildIcon: () => const AppIcon(
+    size: 512,
+  ),
+);
+```
+</td><td><img src="example/assets_dev/app_icons/app_icon.png" alt="image" width="64" height="auto"></td></tr>
+<td>
+
+```dart
+generateAppIconAndroidForeground(
+  onBuildIcon: () => const AppIcon(
+    size: 512,
+    hasTransparentBackground: true,
+  ),
+);
+```
+</td><td><img src="example/assets_dev/app_icons/android_icon_foreground.png" alt="image" width="64" height="auto"></td>
+</tr>
+</table>
+
+Icons can be found in `assets_dev/app_icons`. [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) could then be used to update the launcher icons for targeted platforms.
+
+See [example/test/app_store_screenshots/generate_app_icons_test.dart](example/test/app_store_screenshots/generate_app_icons_test.dart) for full example.
 
 ## Roadmap
 

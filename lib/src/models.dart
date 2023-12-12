@@ -36,6 +36,8 @@ typedef ScreenshotsConfig = ({
   Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
 });
 
+typedef AppIconBuilder = Widget Function();
+
 typedef ScreenBuilder = Widget Function();
 
 typedef ScreenWrapper = Widget Function(Widget);
