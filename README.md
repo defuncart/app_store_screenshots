@@ -115,6 +115,19 @@ Icons can be found in `assets_dev/app_icons`. [flutter_launcher_icons](https://p
 
 See [example/test/app_store_screenshots/generate_app_icons_test.dart](example/test/app_store_screenshots/generate_app_icons_test.dart) for full example.
 
+### Google Play Assets
+
+`generateGooglePlayFeatureGraphic` can be used to generate a 1024x500 feature graphic per locale for Google Play.
+
+<table><tr>
+</td><td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_de.png" alt="image" width="250" height="auto"></td>
+</td><td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_en.png" alt="image" width="250" height="auto"></td>
+</tr></table>
+
+Assets can be found in `assets_dev/google_play_assets`. 
+
+See [example/test/app_store_screenshots/generate_google_play_assets_test.dart](example/test/app_store_screenshots/generate_google_play_assets_test.dart) for full example.
+
 ## Roadmap
 
 - Support iOS

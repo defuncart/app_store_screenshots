@@ -43,3 +43,5 @@ typedef ScreenBuilder = Widget Function();
 typedef ScreenWrapper = Widget Function(Widget);
 
 typedef PostPumpCallback = Future<void> Function(WidgetTester);
+
+typedef GooglePlayFeatureGraphicBuilder = Widget Function(Locale);
