@@ -61,6 +61,7 @@ void generateAppStoreScreenshots({
   );
 }
 
+@visibleForTesting
 Widget createScreenContents({
   required ScreenBuilder onBuildScreen,
   ScreenWrapper? wrapper,
@@ -83,6 +84,7 @@ Widget createScreenContents({
   return wrapper != null ? wrapper(widget) : widget;
 }
 
+@visibleForTesting
 Widget createScreenshot({
   required Color backgroundColor,
   String? text,
@@ -117,6 +119,7 @@ Widget createScreenshot({
       ),
     );
 
+@visibleForTesting
 Future<void> takeScreenshot({
   required WidgetTester tester,
   required Widget widget,
