@@ -1,0 +1,49 @@
+import 'dart:io';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:meta/meta.dart';
+import 'package:path/path.dart' as p;
+
+/// Moves goldens from `test_dir/goldens/[dirName]` to `assets_dev/[dirName]`
+/// When [replaceAllFiles] is true, assets_dev/[dirName] is firstly deleted
+/// When [replaceAllFiles] is false, files are copied one-by-one
+void moveGoldens(
+  String dirName, {
+  bool replaceAllFiles = true,
+}) {
+  // determine path of current test
+  final basedir = (goldenFileComparator as LocalFileComparator).basedir;
+  var testFolderPath = basedir.path.replaceAll(Directory.current.path, '');
+  if (testFolderPath.startsWith('/')) {
+    testFolderPath = testFolderPath.substring(1);
+  }
+
+  final goldenPath = p.join(testFolderPath, 'goldens');
+  final sourcePath = p.join(goldenPath, dirName);
+  final targetPath = p.join('assets_dev', dirName);
+
+  // create output folder if necessary
+  if (!Directory(targetPath).existsSync()) {
+    Directory(targetPath).createSync(recursive: true);
+  }
+
+  if (replaceAllFiles) {
+    // delete target folder if needed
+    if (Directory(targetPath).existsSync()) {
+      Directory(targetPath).deleteSync(recursive: true);
+    }
+
+    Directory(sourcePath).renameSync(targetPath);
+  } else {
+    for (final file in filesForDir(Directory(sourcePath))) {
+      final newPath = file.path.replaceAll(sourcePath, targetPath);
+
+      file.copySync(newPath);
+      file.deleteSync();
+    }
+  }
+  Directory(goldenPath).deleteSync(recursive: true);
+}
+
+@visibleForTesting
+Iterable<File> filesForDir(Directory dir) => dir.listSync(recursive: true).whereType<File>();

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:device_frame/device_frame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -7,6 +5,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
+import 'common.dart';
 import 'models.dart';
 
 @isTest
@@ -62,6 +61,7 @@ void generateAppStoreScreenshots({
   );
 }
 
+@visibleForTesting
 Widget createScreenContents({
   required ScreenBuilder onBuildScreen,
   ScreenWrapper? wrapper,
@@ -84,6 +84,7 @@ Widget createScreenContents({
   return wrapper != null ? wrapper(widget) : widget;
 }
 
+@visibleForTesting
 Widget createScreenshot({
   required Color backgroundColor,
   String? text,
@@ -118,6 +119,7 @@ Widget createScreenshot({
       ),
     );
 
+@visibleForTesting
 Future<void> takeScreenshot({
   required WidgetTester tester,
   required Widget widget,
@@ -133,28 +135,4 @@ Future<void> takeScreenshot({
     await onPostPumped(tester);
   }
   await screenMatchesGolden(tester, name);
-}
-
-void moveGoldens(String dirName) {
-  // determine path to app_store_screenshots
-  final basedir = (goldenFileComparator as LocalFileComparator).basedir;
-  var testFolderPath = basedir.path.replaceAll(Directory.current.path, '');
-  if (testFolderPath.startsWith('/')) {
-    testFolderPath = testFolderPath.substring(1);
-  }
-
-  final goldenPath = p.join(testFolderPath, 'goldens', dirName);
-  final outputPath = p.join('assets_dev', dirName);
-
-  // create output folder if necessary
-  if (!Directory(outputPath).existsSync()) {
-    Directory(outputPath).createSync(recursive: true);
-  }
-
-  // delete target folder if needed
-  if (Directory(outputPath).existsSync()) {
-    Directory(outputPath).deleteSync(recursive: true);
-  }
-
-  Directory(goldenPath).renameSync(outputPath);
 }

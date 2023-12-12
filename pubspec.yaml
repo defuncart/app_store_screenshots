@@ -20,4 +20,9 @@ dependencies:
   path:
 
 dev_dependencies:
+  test:
   flutter_lints: ^3.0.0
+
+flutter:
+  # Required so that apps depending on app_store_screenshots have access to material icons in tests
+  uses-material-design: true

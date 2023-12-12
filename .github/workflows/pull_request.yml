@@ -13,14 +13,13 @@ jobs:
           flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
       - name: Install packages
-        run:
+        run: |
           dart pub get
+          cd example
+          flutter pub get
       - name: Lint
-        run: 
-          dart analyze
+        run: dart analyze
       - name: Formatting
-        run: 
-          dart format . -l 120 --set-exit-if-changed
+        run: dart format . -l 120 --set-exit-if-changed
       - name: Unit tests
-        run:
-          dart test
+        run: dart test
