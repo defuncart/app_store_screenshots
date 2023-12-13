@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 
 import 'common.dart';
 import 'models.dart';
+import 'models.internal.dart';
 
 @isTest
 void generateAppStoreScreenshots({
@@ -43,6 +44,7 @@ void generateAppStoreScreenshots({
                 ),
                 height: device.size.height,
                 phoneFrameDevice: device.frame,
+                orientation: device.orientation,
                 textStyle: screen.textStyle,
               ),
               onPostPumped: screen.onPostPumped,
@@ -90,6 +92,7 @@ Widget createScreenshot({
   String? text,
   required Widget screenContents,
   required DeviceInfo phoneFrameDevice,
+  required Orientation orientation,
   required double height,
   TextStyle? textStyle,
 }) =>
@@ -101,17 +104,18 @@ Widget createScreenshot({
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          if (text != null)
+          if (text != null) ...[
             Text(
               text,
               style: textStyle,
             ),
-          SizedBox(
-            height: text != null ? height * 0.83 : null,
+            const SizedBox(height: 16),
+          ],
+          Expanded(
             child: DeviceFrame(
               device: phoneFrameDevice,
               isFrameVisible: true,
-              orientation: Orientation.portrait,
+              orientation: orientation,
               screen: screenContents,
             ),
           ),
