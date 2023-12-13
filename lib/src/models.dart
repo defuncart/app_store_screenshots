@@ -11,6 +11,8 @@ enum DeviceType {
   androidTablet10Landscape,
   iOSPhone47Portrait,
   iOSPhone47Landscape,
+  iOSPhone55Portrait,
+  iOSPhone55Landscape,
   linux,
   macOS,
   windows,
@@ -26,6 +28,8 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.androidTablet10Landscape => const Size(1920, 1080),
         DeviceType.iOSPhone47Portrait => const Size(750, 1334),
         DeviceType.iOSPhone47Landscape => const Size(1334, 750),
+        DeviceType.iOSPhone55Portrait => const Size(1242, 2208),
+        DeviceType.iOSPhone55Landscape => const Size(2208, 1242),
         DeviceType.linux => const Size(1920, 1080),
         DeviceType.macOS => const Size(1920, 1080),
         DeviceType.windows => const Size(1920, 1080),
@@ -40,6 +44,10 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.androidTablet10Landscape => Devices.android.largeTablet,
         DeviceType.iOSPhone47Portrait => Devices.ios.iPhoneSE,
         DeviceType.iOSPhone47Landscape => Devices.ios.iPhoneSE,
+        DeviceType.iOSPhone55Portrait =>
+          Devices.ios.iPhone13Mini, // should be iPhone 8 Plus, iPhone 7 Plus or iPhone 6s Plus
+        DeviceType.iOSPhone55Landscape =>
+          Devices.ios.iPhone13Mini, // should be iPhone 8 Plus, iPhone 7 Plus or iPhone 6s Plus
         DeviceType.linux => Devices.linux.laptop,
         DeviceType.macOS => Devices.macOS.macBookPro,
         DeviceType.windows => Devices.windows.laptop,
@@ -54,6 +62,8 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.androidTablet10Landscape => TargetPlatform.android,
         DeviceType.iOSPhone47Portrait => TargetPlatform.iOS,
         DeviceType.iOSPhone47Landscape => TargetPlatform.iOS,
+        DeviceType.iOSPhone55Portrait => TargetPlatform.iOS,
+        DeviceType.iOSPhone55Landscape => TargetPlatform.iOS,
         DeviceType.linux => TargetPlatform.linux,
         DeviceType.macOS => TargetPlatform.macOS,
         DeviceType.windows => TargetPlatform.windows,
@@ -68,6 +78,8 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.androidTablet10Landscape => Orientation.landscape,
         DeviceType.iOSPhone47Portrait => Orientation.portrait,
         DeviceType.iOSPhone47Landscape => Orientation.landscape,
+        DeviceType.iOSPhone55Portrait => Orientation.portrait,
+        DeviceType.iOSPhone55Landscape => Orientation.landscape,
         DeviceType.linux => Orientation.landscape,
         DeviceType.macOS => Orientation.landscape,
         DeviceType.windows => Orientation.landscape,
