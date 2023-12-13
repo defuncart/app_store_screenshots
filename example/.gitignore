@@ -44,3 +44,7 @@ app.*.map.json
 
 # FVM
 .fvm/flutter_sdk
+
+# generated screenshots
+/assets_dev/screenshots/
+!/assets_dev/screenshots/androidPhonePortrait/en/
