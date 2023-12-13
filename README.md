@@ -100,6 +100,8 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 | iOSPhone65Landscape      | 6.5" iPhone        | 2688x1242  | iPhone 13 mini  |
 | iOSPhone67Portrait       | 6.7" iPhone        | 1290x2796  | iPhone 13 mini¹ |
 | iOSPhone67Landscape      | 6.7" iPhone        | 2796x1290  | iPhone 13 mini¹ |
+| iOSTablet129Portrait     | 12.9" iPad         | 2048x2732  | iPad 4th Gen    |
+| iOSTablet129Landscape    | 12.9" iPad         | 2732x2048  | iPad 4th Gen    |
 | linux                    |                    | 1920x1080  | Laptop          |
 | macOS                    |                    | 1920x1080  | Laptop          |
 | windows                  |                    | 1920x1080  | Laptop          |
