@@ -84,17 +84,19 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 
 #### Supported Devices
 
-| DeviceType              | Description       | Resolution | Frame          |
-| ----------------------- | ----------------- | ---------- | -------------- |
-| androidPhonePortrait    | Android Phone     | 1080x1920  | One Plus 8 Pro |
-| androidPhoneLandscape   | Android Phone     | 1920x1080  | One Plus 8 Pro |
-| androidTablet7Portrait  | Android 7" Tablet | 1080x1920  | Generic        |
-| androidTablet7Landscape | Android 7" Tablet | 1920x1080  | Generic        |
-| iOSPhone47Portrait      | 4.7" iPhone       | 750x1334   | iPhone SE      |
-| iOSPhone47Landscape     | 4.7" iPhone       | 750x1334   | iPhone SE      |
-| linux                   |                   | 1920x1080  | Laptop         |
-| macOS                   |                   | 1920x1080  | Laptop         |
-| windows                 |                   | 1920x1080  | Laptop         |
+| DeviceType               | Description        | Resolution | Frame          |
+| ------------------------ | ------------------ | ---------- | -------------- |
+| androidPhonePortrait     | Android Phone      | 1080x1920  | One Plus 8 Pro |
+| androidPhoneLandscape    | Android Phone      | 1920x1080  | One Plus 8 Pro |
+| androidTablet7Portrait   | Android 7" Tablet  | 1080x1920  | Generic        |
+| androidTablet7Landscape  | Android 7" Tablet  | 1920x1080  | Generic        |
+| androidTablet10Portrait  | Android 10" Tablet | 1080x1920  | Generic        |
+| androidTablet10Landscape | Android 10" Tablet | 1920x1080  | Generic        |
+| iOSPhone47Portrait       | 4.7" iPhone        | 750x1334   | iPhone SE      |
+| iOSPhone47Landscape      | 4.7" iPhone        | 750x1334   | iPhone SE      |
+| linux                    |                    | 1920x1080  | Laptop         |
+| macOS                    |                    | 1920x1080  | Laptop         |
+| windows                  |                    | 1920x1080  | Laptop         |
 
 ### App Icon
 
