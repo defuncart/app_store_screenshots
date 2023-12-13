@@ -43,6 +43,7 @@ void generateAppStoreScreenshots({
                 ),
                 height: device.size.height,
                 phoneFrameDevice: device.frame,
+                orientation: device.orientation,
                 textStyle: screen.textStyle,
               ),
               onPostPumped: screen.onPostPumped,
@@ -90,6 +91,7 @@ Widget createScreenshot({
   String? text,
   required Widget screenContents,
   required DeviceInfo phoneFrameDevice,
+  required Orientation orientation,
   required double height,
   TextStyle? textStyle,
 }) =>
@@ -107,11 +109,11 @@ Widget createScreenshot({
               style: textStyle,
             ),
           SizedBox(
-            height: text != null ? height * 0.83 : null,
+            height: text != null ? height * (orientation == Orientation.portrait ? 0.83 : 0.75) : null,
             child: DeviceFrame(
               device: phoneFrameDevice,
               isFrameVisible: true,
-              orientation: Orientation.portrait,
+              orientation: orientation,
               screen: screenContents,
             ),
           ),

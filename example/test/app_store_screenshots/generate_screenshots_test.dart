@@ -14,7 +14,7 @@ void main() {
   generateAppStoreScreenshots(
     onSetUp: () {},
     config: (
-      devices: [AppStoreDeviceType.androidPortrait],
+      devices: AppStoreDeviceType.values,
       locales: AppLocalizations.supportedLocales,
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate,
