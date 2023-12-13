@@ -104,11 +104,13 @@ Widget createScreenshot({
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          if (text != null)
+          if (text != null) ...[
             Text(
               text,
               style: textStyle,
             ),
+            const SizedBox(height: 16),
+          ],
           Expanded(
             child: DeviceFrame(
               device: phoneFrameDevice,
