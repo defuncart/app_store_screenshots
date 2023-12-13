@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 enum AppStoreDeviceType {
-  androidPortrait,
-  androidLandscape,
+  androidPhonePortrait,
+  androidPhoneLandscape,
   iOSPhone47Portrait,
   iOSPhone47Landscape,
   linux,
@@ -14,8 +14,8 @@ enum AppStoreDeviceType {
 
 extension AppStoreDeviceTypeExtensions on AppStoreDeviceType {
   Size get size => switch (this) {
-        AppStoreDeviceType.androidPortrait => const Size(1080, 1920),
-        AppStoreDeviceType.androidLandscape => const Size(1920, 1080),
+        AppStoreDeviceType.androidPhonePortrait => const Size(1080, 1920),
+        AppStoreDeviceType.androidPhoneLandscape => const Size(1920, 1080),
         AppStoreDeviceType.iOSPhone47Portrait => const Size(750, 1334),
         AppStoreDeviceType.iOSPhone47Landscape => const Size(1334, 750),
         AppStoreDeviceType.linux => const Size(1920, 1080),
@@ -24,8 +24,8 @@ extension AppStoreDeviceTypeExtensions on AppStoreDeviceType {
       };
 
   DeviceInfo get frame => switch (this) {
-        AppStoreDeviceType.androidPortrait => Devices.android.onePlus8Pro,
-        AppStoreDeviceType.androidLandscape => Devices.android.onePlus8Pro,
+        AppStoreDeviceType.androidPhonePortrait => Devices.android.onePlus8Pro,
+        AppStoreDeviceType.androidPhoneLandscape => Devices.android.onePlus8Pro,
         AppStoreDeviceType.iOSPhone47Portrait => Devices.ios.iPhoneSE,
         AppStoreDeviceType.iOSPhone47Landscape => Devices.ios.iPhoneSE,
         AppStoreDeviceType.linux => Devices.linux.laptop,
@@ -34,8 +34,8 @@ extension AppStoreDeviceTypeExtensions on AppStoreDeviceType {
       };
 
   TargetPlatform get platform => switch (this) {
-        AppStoreDeviceType.androidPortrait => TargetPlatform.android,
-        AppStoreDeviceType.androidLandscape => TargetPlatform.android,
+        AppStoreDeviceType.androidPhonePortrait => TargetPlatform.android,
+        AppStoreDeviceType.androidPhoneLandscape => TargetPlatform.android,
         AppStoreDeviceType.iOSPhone47Portrait => TargetPlatform.iOS,
         AppStoreDeviceType.iOSPhone47Landscape => TargetPlatform.iOS,
         AppStoreDeviceType.linux => TargetPlatform.linux,
@@ -44,8 +44,8 @@ extension AppStoreDeviceTypeExtensions on AppStoreDeviceType {
       };
 
   Orientation get orientation => switch (this) {
-        AppStoreDeviceType.androidPortrait => Orientation.portrait,
-        AppStoreDeviceType.androidLandscape => Orientation.landscape,
+        AppStoreDeviceType.androidPhonePortrait => Orientation.portrait,
+        AppStoreDeviceType.androidPhoneLandscape => Orientation.landscape,
         AppStoreDeviceType.iOSPhone47Portrait => Orientation.portrait,
         AppStoreDeviceType.iOSPhone47Landscape => Orientation.landscape,
         AppStoreDeviceType.linux => Orientation.landscape,

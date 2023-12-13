@@ -4,8 +4,8 @@ A flutter tool to generate screenshots and other assets for app stores.
 
 <table>
 <tr>
-<td><img src="example/assets_dev/screenshots/androidPortrait/en/screenshot_1.png" alt="image" width="320" height="auto"></td>
-<td><img src="example/assets_dev/screenshots/androidPortrait/en/screenshot_2.png" alt="image" width="320" height="auto"></td>
+<td><img src="example/assets_dev/screenshots/androidPhonePortrait/en/screenshot_1.png" alt="image" width="320" height="auto"></td>
+<td><img src="example/assets_dev/screenshots/androidPhonePortrait/en/screenshot_2.png" alt="image" width="320" height="auto"></td>
 </td>
 </table>
 
