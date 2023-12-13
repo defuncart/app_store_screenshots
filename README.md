@@ -82,6 +82,18 @@ Screenshots can bee found in `assets_dev/screenshots`.
 
 See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/test/app_store_screenshots/generate_screenshots_test.dart) for full example.
 
+#### Supported Devices
+
+| DeviceType            | Description   | Resolution | Frame          |
+| --------------------- | ------------- | ---------- | -------------- |
+| androidPhonePortrait  | Android Phone | 1080x1920  | One Plus 8 Pro |
+| androidPhoneLandscape | Android Phone | 1920x1080  | One Plus 8 Pro |
+| iOSPhone47Portrait    | 4.7" iPhone   | 750x1334   | iPhone SE      |
+| iOSPhone47Landscape   | 4.7" iPhone   | 750x1334   | iPhone SE      |
+| linux                 |               | 1920x1080  | Laptop         |
+| macOS                 |               | 1920x1080  | Laptop         |
+| windows               |               | 1920x1080  | Laptop         |
+
 ### App Icon
 
 Given an `AppIcon` widget, `generateAppIcon` and `generateAppIconAndroidForeground` can be used to generated 512x512 app icons and android foreground:
