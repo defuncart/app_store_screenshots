@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 enum DeviceType {
   androidPhonePortrait,
   androidPhoneLandscape,
+  androidTablet7Portrait,
+  androidTablet7Landscape,
   iOSPhone47Portrait,
   iOSPhone47Landscape,
   linux,
@@ -16,6 +18,8 @@ extension DeviceTypeExtensions on DeviceType {
   Size get size => switch (this) {
         DeviceType.androidPhonePortrait => const Size(1080, 1920),
         DeviceType.androidPhoneLandscape => const Size(1920, 1080),
+        DeviceType.androidTablet7Portrait => const Size(1080, 1920),
+        DeviceType.androidTablet7Landscape => const Size(1920, 1080),
         DeviceType.iOSPhone47Portrait => const Size(750, 1334),
         DeviceType.iOSPhone47Landscape => const Size(1334, 750),
         DeviceType.linux => const Size(1920, 1080),
@@ -26,6 +30,8 @@ extension DeviceTypeExtensions on DeviceType {
   DeviceInfo get frame => switch (this) {
         DeviceType.androidPhonePortrait => Devices.android.onePlus8Pro,
         DeviceType.androidPhoneLandscape => Devices.android.onePlus8Pro,
+        DeviceType.androidTablet7Portrait => Devices.android.mediumTablet,
+        DeviceType.androidTablet7Landscape => Devices.android.mediumTablet,
         DeviceType.iOSPhone47Portrait => Devices.ios.iPhoneSE,
         DeviceType.iOSPhone47Landscape => Devices.ios.iPhoneSE,
         DeviceType.linux => Devices.linux.laptop,
@@ -36,6 +42,8 @@ extension DeviceTypeExtensions on DeviceType {
   TargetPlatform get platform => switch (this) {
         DeviceType.androidPhonePortrait => TargetPlatform.android,
         DeviceType.androidPhoneLandscape => TargetPlatform.android,
+        DeviceType.androidTablet7Portrait => TargetPlatform.android,
+        DeviceType.androidTablet7Landscape => TargetPlatform.android,
         DeviceType.iOSPhone47Portrait => TargetPlatform.iOS,
         DeviceType.iOSPhone47Landscape => TargetPlatform.iOS,
         DeviceType.linux => TargetPlatform.linux,
@@ -46,6 +54,8 @@ extension DeviceTypeExtensions on DeviceType {
   Orientation get orientation => switch (this) {
         DeviceType.androidPhonePortrait => Orientation.portrait,
         DeviceType.androidPhoneLandscape => Orientation.landscape,
+        DeviceType.androidTablet7Portrait => Orientation.portrait,
+        DeviceType.androidTablet7Landscape => Orientation.landscape,
         DeviceType.iOSPhone47Portrait => Orientation.portrait,
         DeviceType.iOSPhone47Landscape => Orientation.landscape,
         DeviceType.linux => Orientation.landscape,
