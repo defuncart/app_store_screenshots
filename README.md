@@ -96,6 +96,10 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 | iOSPhone47Landscape      | 4.7" iPhone        | 750x1334   | iPhone SE       |
 | iOSPhone55Portrait       | 5.5" iPhone        | 1242x2208  | iPhone 13 mini¹ |
 | iOSPhone55Landscape      | 5.5" iPhone        | 2208x1242  | iPhone 13 mini¹ |
+| iOSPhone65Portrait       | 6.5" iPhone        | 1242x2688  | iPhone 13 mini  |
+| iOSPhone65Landscape      | 6.5" iPhone        | 2688x1242  | iPhone 13 mini  |
+| iOSPhone67Portrait       | 6.7" iPhone        | 1290x2796  | iPhone 13 mini¹ |
+| iOSPhone67Landscape      | 6.7" iPhone        | 2796x1290  | iPhone 13 mini¹ |
 | linux                    |                    | 1920x1080  | Laptop          |
 | macOS                    |                    | 1920x1080  | Laptop          |
 | windows                  |                    | 1920x1080  | Laptop          |
