@@ -7,6 +7,7 @@ import 'package:path/path.dart' as p;
 
 import 'common.dart';
 import 'models.dart';
+import 'models.internal.dart';
 
 @isTest
 void generateAppStoreScreenshots({
