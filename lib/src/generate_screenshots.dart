@@ -108,8 +108,7 @@ Widget createScreenshot({
               text,
               style: textStyle,
             ),
-          SizedBox(
-            height: text != null ? height * (orientation == Orientation.portrait ? 0.83 : 0.75) : null,
+          Expanded(
             child: DeviceFrame(
               device: phoneFrameDevice,
               isFrameVisible: true,
