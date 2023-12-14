@@ -33,11 +33,30 @@ typedef ScreenshotScenario = ({
   ThemeData? theme,
 });
 
-typedef ScreenshotsConfig = ({
-  Iterable<DeviceType> devices,
-  Iterable<Locale> locales,
-  Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates,
-});
+class ScreenshotsConfig {
+  final Iterable<DeviceType> devices;
+  final Iterable<Locale> locales;
+  final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+
+  ScreenshotsConfig({
+    required this.devices,
+    required this.locales,
+    this.localizationsDelegates,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotsConfig &&
+        other.devices == devices &&
+        other.locales == locales &&
+        other.localizationsDelegates == localizationsDelegates;
+  }
+
+  @override
+  int get hashCode => devices.hashCode ^ locales.hashCode ^ localizationsDelegates.hashCode;
+}
 
 typedef AppIconBuilder = Widget Function();
 

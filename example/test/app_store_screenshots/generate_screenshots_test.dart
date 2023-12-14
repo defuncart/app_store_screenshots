@@ -13,7 +13,7 @@ void main() {
 
   generateAppStoreScreenshots(
     onSetUp: () {},
-    config: (
+    config: ScreenshotsConfig(
       devices: DeviceType.values,
       locales: AppLocalizations.supportedLocales,
       localizationsDelegates: [
