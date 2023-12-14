@@ -24,51 +24,6 @@ enum DeviceType {
   windows,
 }
 
-class ScreenshotScenario {
-  final ScreenBuilder onBuildScreen;
-  final ScreenWrapper? wrapper;
-  final PostPumpCallback? onPostPumped;
-  final Color? backgroundColor;
-  final Map<Locale, String> text;
-  final TextStyle? textStyle;
-  final ThemeData? theme;
-
-  ScreenshotScenario({
-    required this.onBuildScreen,
-    this.wrapper,
-    this.onPostPumped,
-    this.backgroundColor,
-    required this.text,
-    this.textStyle,
-    this.theme,
-  });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is ScreenshotScenario &&
-        other.onBuildScreen == onBuildScreen &&
-        other.wrapper == wrapper &&
-        other.onPostPumped == onPostPumped &&
-        other.backgroundColor == backgroundColor &&
-        mapEquals(other.text, text) &&
-        other.textStyle == textStyle &&
-        other.theme == theme;
-  }
-
-  @override
-  int get hashCode {
-    return onBuildScreen.hashCode ^
-        wrapper.hashCode ^
-        onPostPumped.hashCode ^
-        backgroundColor.hashCode ^
-        text.hashCode ^
-        textStyle.hashCode ^
-        theme.hashCode;
-  }
-}
-
 class ScreenshotsConfig {
   final Iterable<DeviceType> devices;
   final Iterable<Locale> locales;
@@ -105,6 +60,55 @@ class ScreenshotsConfig {
         locales.hashCode ^
         localizationsDelegates.hashCode ^
         backgroundColor.hashCode ^
+        textStyle.hashCode ^
+        theme.hashCode;
+  }
+}
+
+class ScreenshotScenario {
+  final ScreenBuilder onBuildScreen;
+  final ScreenWrapper? wrapper;
+  final PostPumpCallback? onPostPumped;
+  final bool isFrameVisible;
+  final Color? backgroundColor;
+  final Map<Locale, String> text;
+  final TextStyle? textStyle;
+  final ThemeData? theme;
+
+  ScreenshotScenario({
+    required this.onBuildScreen,
+    this.wrapper,
+    this.onPostPumped,
+    this.isFrameVisible = true,
+    this.backgroundColor,
+    required this.text,
+    this.textStyle,
+    this.theme,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotScenario &&
+        other.onBuildScreen == onBuildScreen &&
+        other.wrapper == wrapper &&
+        other.onPostPumped == onPostPumped &&
+        other.isFrameVisible == isFrameVisible &&
+        other.backgroundColor == backgroundColor &&
+        mapEquals(other.text, text) &&
+        other.textStyle == textStyle &&
+        other.theme == theme;
+  }
+
+  @override
+  int get hashCode {
+    return onBuildScreen.hashCode ^
+        wrapper.hashCode ^
+        onPostPumped.hashCode ^
+        isFrameVisible.hashCode ^
+        backgroundColor.hashCode ^
+        text.hashCode ^
         textStyle.hashCode ^
         theme.hashCode;
   }
