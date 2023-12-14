@@ -22,30 +22,24 @@ void main() {
         GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate,
       ],
+      backgroundColor: Colors.green,
+      theme: lightTheme,
+      textStyle: textStyle,
     ),
     screens: [
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
-        wrapper: null,
-        onPostPumped: null,
-        backgroundColor: Colors.green,
         text: {
           const Locale('en'): 'Light mode',
           const Locale('de'): 'Hellmodus',
         },
-        textStyle: textStyle,
-        theme: lightTheme,
       ),
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
-        wrapper: null,
-        onPostPumped: null,
-        backgroundColor: Colors.green,
         text: {
           const Locale('en'): 'Dark mode',
           const Locale('de'): 'Dunkelmodus',
         },
-        textStyle: textStyle,
         theme: darkTheme,
       ),
     ],

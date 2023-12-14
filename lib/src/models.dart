@@ -28,7 +28,7 @@ class ScreenshotScenario {
   final ScreenBuilder onBuildScreen;
   final ScreenWrapper? wrapper;
   final PostPumpCallback? onPostPumped;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final Map<Locale, String> text;
   final TextStyle? textStyle;
   final ThemeData? theme;
@@ -37,7 +37,7 @@ class ScreenshotScenario {
     required this.onBuildScreen,
     this.wrapper,
     this.onPostPumped,
-    required this.backgroundColor,
+    this.backgroundColor,
     required this.text,
     this.textStyle,
     this.theme,
@@ -73,11 +73,17 @@ class ScreenshotsConfig {
   final Iterable<DeviceType> devices;
   final Iterable<Locale> locales;
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+  final Color backgroundColor;
+  final TextStyle? textStyle;
+  final ThemeData? theme;
 
   ScreenshotsConfig({
     required this.devices,
     required this.locales,
     this.localizationsDelegates,
+    required this.backgroundColor,
+    this.textStyle,
+    this.theme,
   });
 
   @override
@@ -87,11 +93,21 @@ class ScreenshotsConfig {
     return other is ScreenshotsConfig &&
         other.devices == devices &&
         other.locales == locales &&
-        other.localizationsDelegates == localizationsDelegates;
+        other.localizationsDelegates == localizationsDelegates &&
+        other.backgroundColor == backgroundColor &&
+        other.textStyle == textStyle &&
+        other.theme == theme;
   }
 
   @override
-  int get hashCode => devices.hashCode ^ locales.hashCode ^ localizationsDelegates.hashCode;
+  int get hashCode {
+    return devices.hashCode ^
+        locales.hashCode ^
+        localizationsDelegates.hashCode ^
+        backgroundColor.hashCode ^
+        textStyle.hashCode ^
+        theme.hashCode;
+  }
 }
 
 typedef AppIconBuilder = Widget Function();
