@@ -2,36 +2,91 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+/// All supported device types
 enum DeviceType {
+  /// Android phone 1920x1080 Orientation: Portrait
   androidPhonePortrait,
+
+  /// Android phone 1920x1080 Orientation: Landscape
   androidPhoneLandscape,
+
+  /// Android 7" Tablet Orientation: Portrait
   androidTablet7Portrait,
+
+  /// Android 7" Tablet Orientation: Landscape
   androidTablet7Landscape,
+
+  /// Android 10" Tablet Orientation: Portrait
   androidTablet10Portrait,
+
+  /// Android 10" Tablet Orientation: Landscape
   androidTablet10Landscape,
+
+  /// iPhone 4.7" Orientation: Portrait
   iOSPhone47Portrait,
+
+  /// iPhone 4.7" Orientation: Landscape
   iOSPhone47Landscape,
+
+  /// iPhone 5.5" Orientation: Portrait
   iOSPhone55Portrait,
+
+  /// iPhone 5.5" Orientation: Landscape
   iOSPhone55Landscape,
+
+  /// iPhone 6.5" Orientation: Portrait
   iOSPhone65Portrait,
+
+  /// iPhone 6.5" Orientation: Landscape
   iOSPhone65Landscape,
+
+  /// iPhone 6.7" Orientation: Portrait
   iOSPhone67Portrait,
+
+  /// iPhone 6.7" Orientation: Landscape
   iOSPhone67Landscape,
+
+  /// iPad 12.9" Orientation: Portrait
   iOSTablet129Portrait,
+
+  /// iPad 12.9" Orientation: Landscape
   iOSTablet129Landscape,
+
+  /// Laptop running Linux
   linux,
+
+  /// Laptop running macOS
   macOS,
+
+  /// Laptop running Windows
   windows,
 }
 
+/// A base configuration used for all screenshots
 class ScreenshotsConfig {
+  /// Supported device types
+  ///
+  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone67Portrait, DeviceType.iOSPhone55Portrait]
+  ///
+  /// See [DeviceType] for more info
   final Iterable<DeviceType> devices;
+
+  /// Supported locales, a screenshot will be generated for each locale
   final Iterable<Locale> locales;
+
+  /// Optional localization delegates. Required when screens use intl.
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
+
+  /// Background used for all screenshots (unless overridden)
   final ScreenshotBackground background;
+
+  /// Label TextStyle used for all screenshots (unless overridden)
   final TextStyle? textStyle;
+
+  /// Theme used for all screenshots (unless overridden)
   final ThemeData? theme;
 
+  /// A base configuration used for all screenshots
   ScreenshotsConfig({
     required this.devices,
     required this.locales,
@@ -65,16 +120,37 @@ class ScreenshotsConfig {
   }
 }
 
+/// A scenario for a specific screenshot
 class ScreenshotScenario {
+  /// Callback to build the screen
   final ScreenBuilder onBuildScreen;
+
+  /// Optional wrapper, useful for dependency injection (i.e. riverpod, bloc, provider)
   final ScreenWrapper? wrapper;
+
+  /// Optional callback after widget has been pumped
+  ///
+  /// Useful when a UI element needs interaction before taking screenshot (i.e. enter text in search field)
   final PostPumpCallback? onPostPumped;
+
+  /// Whether device frame should be visible
   final bool isFrameVisible;
+
+  /// Optional background, when null default from [ScreenshotsConfig] is used
   final ScreenshotBackground? background;
+
+  /// Localized label texts
+  ///
+  /// Note: Locales need to match as specified in [ScreenshotsConfig]
   final Map<Locale, String> text;
+
+  /// Optional label TextStyle, when null default from [ScreenshotsConfig] is used
   final TextStyle? textStyle;
+
+  /// Optional theme, when null default from [ScreenshotsConfig] is used
   final ThemeData? theme;
 
+  /// A scenario for a specific screenshot
   ScreenshotScenario({
     required this.onBuildScreen,
     this.wrapper,
@@ -114,13 +190,16 @@ class ScreenshotScenario {
   }
 }
 
+/// A background for a specific screenshot
 class ScreenshotBackground {
+  /// A background with a solid color
   ScreenshotBackground.solid({
     required Color color,
   }) : widget = ColoredBox(
           color: color,
         );
 
+  /// A background with a gradient
   ScreenshotBackground.gradient({
     required Gradient gradient,
   }) : widget = DecoratedBox(
@@ -129,6 +208,7 @@ class ScreenshotBackground {
           ),
         );
 
+  /// A background with a custom widget (i.e CustomPainter)
   ScreenshotBackground.widget({
     required this.widget,
   });
@@ -146,12 +226,12 @@ class ScreenshotBackground {
   int get hashCode => widget.hashCode;
 }
 
-typedef AppIconBuilder = Widget Function();
-
 typedef ScreenBuilder = Widget Function();
 
 typedef ScreenWrapper = Widget Function(Widget);
 
 typedef PostPumpCallback = Future<void> Function(WidgetTester);
+
+typedef AppIconBuilder = Widget Function();
 
 typedef GooglePlayFeatureGraphicBuilder = Widget Function(Locale);

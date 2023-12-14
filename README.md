@@ -150,8 +150,8 @@ See [example/test/app_store_screenshots/generate_app_icons_test.dart](example/te
 `generateGooglePlayFeatureGraphic` can be used to generate a 1024x500 feature graphic per locale for Google Play.
 
 <table><tr>
-</td><td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_de.png" alt="image" width="250" height="auto"></td>
-</td><td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_en.png" alt="image" width="250" height="auto"></td>
+<td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_de.png" alt="image" width="250" height="auto"></td>
+<td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_en.png" alt="image" width="250" height="auto"></td>
 </tr></table>
 
 Assets can be found in `assets_dev/google_play_assets`. 
@@ -161,4 +161,5 @@ See [example/test/app_store_screenshots/generate_google_play_assets_test.dart](e
 ## Roadmap
 
 - Add variable device position (i.e 75% visible, bottom not on screen)
+- 0.0.1 release on pub.dev
 - Add testing
