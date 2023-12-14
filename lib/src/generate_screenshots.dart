@@ -31,7 +31,7 @@ void generateAppStoreScreenshots({
             await takeScreenshot(
               tester: tester,
               widget: createScreenshot(
-                backgroundColor: screen.backgroundColor ?? config.backgroundColor,
+                background: screen.background ?? config.background,
                 text: screen.text[locale],
                 screenContents: createScreenContents(
                   onBuildScreen: screen.onBuildScreen,
@@ -89,7 +89,7 @@ Widget createScreenContents({
 
 @visibleForTesting
 Widget createScreenshot({
-  required Color backgroundColor,
+  required ScreenshotBackground background,
   String? text,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
@@ -98,27 +98,38 @@ Widget createScreenshot({
   required double height,
   TextStyle? textStyle,
 }) =>
-    Container(
+    SizedBox(
       height: height,
-      color: backgroundColor,
-      padding: const EdgeInsets.all(48),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Stack(
+        alignment: Alignment.topCenter,
         children: [
-          if (text != null) ...[
-            Text(
-              text,
-              style: textStyle,
-            ),
-            const SizedBox(height: 16),
-          ],
-          Expanded(
-            child: DeviceFrame(
-              device: deviceFrame,
-              isFrameVisible: isFrameVisible,
-              orientation: orientation,
-              screen: screenContents,
+          // Background
+          SizedBox.expand(
+            child: background.widget,
+          ),
+          // Content
+          Padding(
+            padding: const EdgeInsets.all(48),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (text != null) ...[
+                  Text(
+                    text,
+                    style: textStyle,
+                  ),
+                  const SizedBox(height: 16),
+                ],
+                Expanded(
+                  child: DeviceFrame(
+                    device: deviceFrame,
+                    isFrameVisible: isFrameVisible,
+                    orientation: orientation,
+                    screen: screenContents,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

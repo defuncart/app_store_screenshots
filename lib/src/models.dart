@@ -28,7 +28,7 @@ class ScreenshotsConfig {
   final Iterable<DeviceType> devices;
   final Iterable<Locale> locales;
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
-  final Color backgroundColor;
+  final ScreenshotBackground background;
   final TextStyle? textStyle;
   final ThemeData? theme;
 
@@ -36,7 +36,7 @@ class ScreenshotsConfig {
     required this.devices,
     required this.locales,
     this.localizationsDelegates,
-    required this.backgroundColor,
+    required this.background,
     this.textStyle,
     this.theme,
   });
@@ -49,7 +49,7 @@ class ScreenshotsConfig {
         other.devices == devices &&
         other.locales == locales &&
         other.localizationsDelegates == localizationsDelegates &&
-        other.backgroundColor == backgroundColor &&
+        other.background == background &&
         other.textStyle == textStyle &&
         other.theme == theme;
   }
@@ -59,7 +59,7 @@ class ScreenshotsConfig {
     return devices.hashCode ^
         locales.hashCode ^
         localizationsDelegates.hashCode ^
-        backgroundColor.hashCode ^
+        background.hashCode ^
         textStyle.hashCode ^
         theme.hashCode;
   }
@@ -70,7 +70,7 @@ class ScreenshotScenario {
   final ScreenWrapper? wrapper;
   final PostPumpCallback? onPostPumped;
   final bool isFrameVisible;
-  final Color? backgroundColor;
+  final ScreenshotBackground? background;
   final Map<Locale, String> text;
   final TextStyle? textStyle;
   final ThemeData? theme;
@@ -80,7 +80,7 @@ class ScreenshotScenario {
     this.wrapper,
     this.onPostPumped,
     this.isFrameVisible = true,
-    this.backgroundColor,
+    this.background,
     required this.text,
     this.textStyle,
     this.theme,
@@ -95,7 +95,7 @@ class ScreenshotScenario {
         other.wrapper == wrapper &&
         other.onPostPumped == onPostPumped &&
         other.isFrameVisible == isFrameVisible &&
-        other.backgroundColor == backgroundColor &&
+        other.background == background &&
         mapEquals(other.text, text) &&
         other.textStyle == textStyle &&
         other.theme == theme;
@@ -107,11 +107,43 @@ class ScreenshotScenario {
         wrapper.hashCode ^
         onPostPumped.hashCode ^
         isFrameVisible.hashCode ^
-        backgroundColor.hashCode ^
+        background.hashCode ^
         text.hashCode ^
         textStyle.hashCode ^
         theme.hashCode;
   }
+}
+
+class ScreenshotBackground {
+  ScreenshotBackground.solid({
+    required Color color,
+  }) : widget = ColoredBox(
+          color: color,
+        );
+
+  ScreenshotBackground.gradient({
+    required Gradient gradient,
+  }) : widget = DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: gradient,
+          ),
+        );
+
+  ScreenshotBackground.widget({
+    required this.widget,
+  });
+
+  final Widget widget;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotBackground && other.widget == widget;
+  }
+
+  @override
+  int get hashCode => widget.hashCode;
 }
 
 typedef AppIconBuilder = Widget Function();

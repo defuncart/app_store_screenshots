@@ -156,6 +156,5 @@ See [example/test/app_store_screenshots/generate_google_play_assets_test.dart](e
 
 ## Roadmap
 
-- Add customizable backgrounds
 - Add variable device position (i.e 75% visible, bottom not on screen)
 - Add testing

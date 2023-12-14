@@ -22,7 +22,9 @@ void main() {
         GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate,
       ],
-      backgroundColor: Colors.green,
+      background: ScreenshotBackground.solid(
+        color: Colors.green,
+      ),
       theme: lightTheme,
       textStyle: textStyle,
     ),
