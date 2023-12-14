@@ -1,4 +1,4 @@
-import 'package:example/page1.dart';
+import 'package:example/pages/page1.dart';
 import 'package:example/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

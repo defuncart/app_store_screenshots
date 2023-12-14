@@ -2,5 +2,9 @@
   "helloWorld": "Hello World!",
   "@helloWorld": {
     "description": "The conventional newborn programmer greeting"
+  },
+  "cubitPushedTimes": "Pressed {times} times",
+  "@cubitPushedTimes": {
+    "description": "How many times a button has been pressed"
   }
 }
