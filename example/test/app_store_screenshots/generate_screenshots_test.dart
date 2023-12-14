@@ -24,7 +24,7 @@ void main() {
       ],
     ),
     screens: [
-      (
+      ScreenshotScenario(
         onBuildScreen: () => const Page1(),
         wrapper: null,
         onPostPumped: null,
@@ -36,7 +36,7 @@ void main() {
         textStyle: textStyle,
         theme: lightTheme,
       ),
-      (
+      ScreenshotScenario(
         onBuildScreen: () => const Page1(),
         wrapper: null,
         onPostPumped: null,

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -23,15 +24,50 @@ enum DeviceType {
   windows,
 }
 
-typedef ScreenshotScenario = ({
-  ScreenBuilder onBuildScreen,
-  ScreenWrapper? wrapper,
-  PostPumpCallback? onPostPumped,
-  Color backgroundColor,
-  Map<Locale, String> text,
-  TextStyle? textStyle,
-  ThemeData? theme,
-});
+class ScreenshotScenario {
+  final ScreenBuilder onBuildScreen;
+  final ScreenWrapper? wrapper;
+  final PostPumpCallback? onPostPumped;
+  final Color backgroundColor;
+  final Map<Locale, String> text;
+  final TextStyle? textStyle;
+  final ThemeData? theme;
+
+  ScreenshotScenario({
+    required this.onBuildScreen,
+    this.wrapper,
+    this.onPostPumped,
+    required this.backgroundColor,
+    required this.text,
+    this.textStyle,
+    this.theme,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotScenario &&
+        other.onBuildScreen == onBuildScreen &&
+        other.wrapper == wrapper &&
+        other.onPostPumped == onPostPumped &&
+        other.backgroundColor == backgroundColor &&
+        mapEquals(other.text, text) &&
+        other.textStyle == textStyle &&
+        other.theme == theme;
+  }
+
+  @override
+  int get hashCode {
+    return onBuildScreen.hashCode ^
+        wrapper.hashCode ^
+        onPostPumped.hashCode ^
+        backgroundColor.hashCode ^
+        text.hashCode ^
+        textStyle.hashCode ^
+        theme.hashCode;
+  }
+}
 
 class ScreenshotsConfig {
   final Iterable<DeviceType> devices;
