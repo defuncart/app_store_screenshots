@@ -12,6 +12,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   intl:
+  flutter_riverpod:
+  riverpod_annotation:
+  flutter_bloc:
 
 dev_dependencies:
   flutter_test:
@@ -19,6 +22,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   app_store_screenshots:
     path: ../
+  build_runner:
+  riverpod_generator:
 
 flutter:
   uses-material-design: true
