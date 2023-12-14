@@ -7,11 +7,20 @@ class Page1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Welcome to Flutter'),
-      ),
       body: Center(
-        child: Text(context.l10n.helloWorld),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.flutter_dash,
+              size: 196,
+            ),
+            Text(
+              context.l10n.helloWorld,
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+          ],
+        ),
       ),
     );
   }
