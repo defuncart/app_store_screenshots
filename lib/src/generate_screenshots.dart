@@ -17,49 +17,47 @@ void generateAppStoreScreenshots({
   VoidCallback? onTearDown,
   bool? skip,
 }) {
-  testGoldens(
-    'Generate screenshots',
-    (tester) async {
-      await loadAppFonts();
+  for (final screen in screens) {
+    final screenshotNumber = screens.indexOf(screen) + 1;
+    for (final device in config.devices) {
+      for (final locale in config.locales) {
+        testGoldens('Generate screenshot $screenshotNumber ${device.name} $locale', (tester) async {
+          await loadAppFonts();
+          onSetUp?.call();
 
-      onSetUp?.call();
-
-      for (final screen in screens) {
-        final screenshotNumber = screens.indexOf(screen) + 1;
-        for (final device in config.devices) {
-          for (final locale in config.locales) {
-            await takeScreenshot(
-              tester: tester,
-              widget: createScreenshot(
-                background: screen.background ?? config.background,
-                text: screen.text[locale],
-                screenContents: createScreenContents(
-                  onBuildScreen: screen.onBuildScreen,
-                  wrapper: screen.wrapper,
-                  locale: locale,
-                  platform: device.platform,
-                  theme: screen.theme ?? config.theme,
-                  localizationsDelegates: config.localizationsDelegates,
-                  supportedLocales: config.locales,
-                ),
-                height: device.size.height,
-                deviceFrame: device.frame,
-                isFrameVisible: screen.isFrameVisible,
-                orientation: device.orientation,
-                textStyle: screen.textStyle ?? config.textStyle,
+          await takeScreenshot(
+            tester: tester,
+            widget: createScreenshot(
+              background: screen.background ?? config.background,
+              text: screen.text[locale],
+              screenContents: createScreenContents(
+                onBuildScreen: screen.onBuildScreen,
+                wrapper: screen.wrapper,
+                locale: locale,
+                platform: device.platform,
+                theme: screen.theme ?? config.theme,
+                localizationsDelegates: config.localizationsDelegates,
+                supportedLocales: config.locales,
               ),
-              onPostPumped: screen.onPostPumped,
-              name: p.join('screenshots', device.name, locale.languageCode, 'screenshot_$screenshotNumber'),
-              size: device.size,
-            );
+              height: device.size.height,
+              deviceFrame: device.frame,
+              isFrameVisible: screen.isFrameVisible,
+              orientation: device.orientation,
+              textStyle: screen.textStyle ?? config.textStyle,
+            ),
+            onPostPumped: screen.onPostPumped,
+            name: p.join('screenshots', device.name, locale.languageCode, 'screenshot_$screenshotNumber'),
+            size: device.size,
+          );
+
+          onTearDown?.call();
+
+          // once all goldens are generated, move to target folder
+          if (screen == screens.last && device == config.devices.last && locale == config.locales.last) {
+            moveGoldens('screenshots');
           }
-        }
+        }, skip: skip);
       }
-
-      moveGoldens('screenshots');
-
-      onTearDown?.call();
-    },
-    skip: skip,
-  );
+    }
+  }
 }
