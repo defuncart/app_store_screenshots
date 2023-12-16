@@ -9,6 +9,10 @@ import 'models.dart';
 import 'models.internal.dart';
 
 /// Generates [screen] number of screenshots with a given [config]
+///
+/// [onSetUp] is called before each screen is generated
+///
+/// [onTearDown] is called after each screen has been generated
 @isTest
 void generateAppStoreScreenshots({
   VoidCallback? onSetUp,
