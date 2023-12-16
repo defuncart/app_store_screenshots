@@ -25,7 +25,7 @@ void generateAppStoreScreenshots({
     final screenshotNumber = screens.indexOf(screen) + 1;
     for (final device in config.devices) {
       for (final locale in config.locales) {
-        GoldenToolkit.runWithConfiguration(
+        testGoldensWithShadows(
           () => testGoldens(
             'Generate screenshot $screenshotNumber ${device.name} $locale',
             (tester) async {
@@ -65,9 +65,6 @@ void generateAppStoreScreenshots({
               }
             },
             skip: skip,
-          ),
-          config: GoldenToolkitConfiguration(
-            enableRealShadows: true,
           ),
         );
       }

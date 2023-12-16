@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
@@ -47,3 +48,12 @@ void moveGoldens(
 
 @visibleForTesting
 Iterable<File> filesForDir(Directory dir) => dir.listSync(recursive: true).whereType<File>();
+
+/// Test [body] with shadows enabled & default tags
+void testGoldensWithShadows<T>(T Function() body) => GoldenToolkit.runWithConfiguration(
+      body,
+      config: GoldenToolkitConfiguration(
+        enableRealShadows: true,
+        tags: const ['app_store_screenshots'],
+      ),
+    );
