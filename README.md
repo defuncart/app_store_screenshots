@@ -13,13 +13,28 @@ A flutter tool to generate screenshots and other assets for app stores.
 </tr>
 </table>
 
+## About
+
+*app_store_screenshots* utilizes goldens, a Flutter testing tool, to generate assets:
+
+```sh
+flutter test --update-goldens --tags app_store_screenshots
+```
+
+To ensure that these tests do not interfere with your testing pipeline, exclude the tag `app_store_screenshots`:
+
+```sh
+flutter test --exclude-tags app_store_screenshots
+```
+
 ## Getting Started
 
-Add dependency
+Add dependency:
 
 ```yaml
-app_store_screenshots:
-    git: https://github.com/defuncart/app_store_screenshots
+dev_dependency:
+  app_store_screenshots:
+      git: https://github.com/defuncart/app_store_screenshots
 ```
 
 ### Screenshots
@@ -65,19 +80,7 @@ void main() {
 }
 ```
 
-Generate screenshots using
-
-```sh
-flutter test test/app_store_screenshots/ --update-goldens
-```
-
-or
-
-```sh
-dart run app_store_screenshots:screenshots
-```
-
-Screenshots can bee found in `assets_dev/screenshots`.
+Screenshots can be found in `assets_dev/screenshots`.
 
 See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/test/app_store_screenshots/generate_screenshots_test.dart) for full example.
 
@@ -105,7 +108,7 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 | macOS                    |                    | 1920x1080  | Laptop          |
 | windows                  |                    | 1920x1080  | Laptop          |
 
-¹ Incorrect frame but correct resolution
+¹Incorrect frame but correct resolution
 
 ### App Icon
 

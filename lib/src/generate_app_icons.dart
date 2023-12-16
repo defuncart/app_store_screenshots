@@ -11,24 +11,26 @@ void generateAppIcon({
   required AppIconBuilder onBuildIcon,
   bool? skip,
 }) {
-  testGoldens(
-    'Generate app icon',
-    (tester) async {
-      await loadAppFonts();
+  testGoldensWithShadows(
+    () => testGoldens(
+      'Generate app icon',
+      (tester) async {
+        await loadAppFonts();
 
-      const size = Size(512, 512);
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: onBuildIcon(),
-        ),
-        surfaceSize: size,
-      );
-      await screenMatchesGolden(tester, 'app_icons/app_icon');
+        const size = Size(512, 512);
+        await tester.pumpWidgetBuilder(
+          SizedBox.fromSize(
+            size: size,
+            child: onBuildIcon(),
+          ),
+          surfaceSize: size,
+        );
+        await screenMatchesGolden(tester, 'app_icons/app_icon');
 
-      moveGoldens('app_icons', replaceAllFiles: false);
-    },
-    skip: skip,
+        moveGoldens('app_icons', replaceAllFiles: false);
+      },
+      skip: skip,
+    ),
   );
 }
 
@@ -41,33 +43,35 @@ void generateAppIconAndroidForeground({
   EdgeInsets padding = const EdgeInsets.all(80),
   bool? skip,
 }) {
-  testGoldens(
-    'Generate android icon foreground',
-    (tester) async {
-      await loadAppFonts();
+  testGoldensWithShadows(
+    () => testGoldens(
+      'Generate android icon foreground',
+      (tester) async {
+        await loadAppFonts();
 
-      const size = Size(512, 512);
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: Padding(
-            padding: padding,
-            child: onBuildIcon(),
+        const size = Size(512, 512);
+        await tester.pumpWidgetBuilder(
+          SizedBox.fromSize(
+            size: size,
+            child: Padding(
+              padding: padding,
+              child: onBuildIcon(),
+            ),
           ),
-        ),
-        surfaceSize: size,
-        wrapper: (child) => MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Material(
-            color: Colors.transparent,
-            child: child,
+          surfaceSize: size,
+          wrapper: (child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Material(
+              color: Colors.transparent,
+              child: child,
+            ),
           ),
-        ),
-      );
-      await screenMatchesGolden(tester, 'app_icons/android_icon_foreground');
+        );
+        await screenMatchesGolden(tester, 'app_icons/android_icon_foreground');
 
-      moveGoldens('app_icons', replaceAllFiles: false);
-    },
-    skip: skip,
+        moveGoldens('app_icons', replaceAllFiles: false);
+      },
+      skip: skip,
+    ),
   );
 }
