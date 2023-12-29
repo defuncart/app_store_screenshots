@@ -52,14 +52,32 @@ enum DeviceType {
   /// iPad 12.9" Orientation: Landscape
   iOSTablet129Landscape,
 
-  /// Laptop running Linux
+  /// Linux Toolbar
   linux,
 
-  /// Laptop running macOS
+  /// Laptop running Linux
+  linuxLaptop,
+
+  /// Monitor running Linux
+  linuxMonitor,
+
+  /// macOS toolbar
   macOS,
 
-  /// Laptop running Windows
+  /// Laptop running Linux
+  macOSLaptop,
+
+  /// Monitor running Linux
+  macOSMonitor,
+
+  /// Windows toolbar
   windows,
+
+  /// Laptop running Linux
+  windowsLaptop,
+
+  /// Monitor running Linux
+  windowsMonitor,
 }
 
 /// A base configuration used for all screenshots

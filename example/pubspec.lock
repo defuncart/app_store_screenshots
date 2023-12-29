@@ -227,10 +227,11 @@ packages:
   device_frame:
     dependency: transitive
     description:
-      name: device_frame
-      sha256: afe76182aec178d171953d9b4a50a43c57c7cf3c77d8b09a48bf30c8fa04dd9d
-      url: "https://pub.dev"
-    source: hosted
+      path: device_frame
+      ref: "feature/add-desktop-window-option"
+      resolved-ref: "3975cc513c03380a8be1f30e5a28df3e7fef3d17"
+      url: "https://github.com/defuncart/fork_flutter_device_preview"
+    source: git
     version: "1.1.0"
   fake_async:
     dependency: transitive
