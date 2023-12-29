@@ -35,17 +35,21 @@ void main() {
     screens: [
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
-        text: {
-          const Locale('en'): 'Light mode',
-          const Locale('de'): 'Hellmodus',
-        },
+        text: ScreenshotText(
+          text: {
+            const Locale('en'): 'Light mode',
+            const Locale('de'): 'Hellmodus',
+          },
+        ),
       ),
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
-        text: {
-          const Locale('en'): 'Dark mode',
-          const Locale('de'): 'Dunkelmodus',
-        },
+        text: ScreenshotText(
+          text: {
+            const Locale('en'): 'Dark mode',
+            const Locale('de'): 'Dunkelmodus',
+          },
+        ),
         theme: darkTheme,
       ),
       ScreenshotScenario(
@@ -61,10 +65,12 @@ void main() {
           ],
           child: child,
         ),
-        text: {
-          const Locale('en'): 'Riverpod',
-          const Locale('de'): 'Riverpod',
-        },
+        text: ScreenshotText(
+          text: {
+            const Locale('en'): 'Riverpod',
+            const Locale('de'): 'Riverpod',
+          },
+        ),
         background: ScreenshotBackground.gradient(
           gradient: const LinearGradient(
             begin: Alignment.bottomRight,
@@ -83,10 +89,12 @@ void main() {
           child: child,
         ),
         onPostPumped: (tester) async => await tester.tap(find.byType(FloatingActionButton).first),
-        text: {
-          const Locale('en'): 'bloc',
-          const Locale('de'): 'bloc',
-        },
+        text: ScreenshotText(
+          text: {
+            const Locale('en'): 'bloc',
+            const Locale('de'): 'bloc',
+          },
+        ),
         background: ScreenshotBackground.widget(
           widget: const TriangleBackground(
             color1: Colors.green,

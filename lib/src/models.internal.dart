@@ -94,3 +94,9 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.windows => Orientation.landscape,
       };
 }
+
+extension ScreenshotTextPositionExtensions on ScreenshotTextPosition {
+  bool get isTop => this == ScreenshotTextPosition.top;
+
+  bool get isBottom => this == ScreenshotTextPosition.bottom;
+}

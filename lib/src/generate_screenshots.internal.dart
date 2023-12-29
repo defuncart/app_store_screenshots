@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 
 import 'models.dart';
+import 'models.internal.dart';
 
 Widget createScreenContents({
   required ScreenBuilder onBuildScreen,
@@ -27,9 +28,27 @@ Widget createScreenContents({
   return wrapper != null ? wrapper(widget) : widget;
 }
 
+typedef InternalScreenshotText = ({
+  String text,
+  ScreenshotTextPosition position,
+});
+
+extension ScreenshotTextExtensions on ScreenshotText? {
+  InternalScreenshotText? toInternalModel(Locale locale) {
+    if (this == null || !this!.text.containsKey(locale)) {
+      return null;
+    }
+
+    return (
+      text: this!.text[locale]!,
+      position: this!.position,
+    );
+  }
+}
+
 Widget createScreenshot({
   required ScreenshotBackground background,
-  String? text,
+  InternalScreenshotText? text,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
   required bool isFrameVisible,
@@ -53,9 +72,9 @@ Widget createScreenshot({
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                if (text != null) ...[
+                if (text != null && text.position.isTop) ...[
                   Text(
-                    text,
+                    text.text,
                     style: textStyle,
                   ),
                   const SizedBox(height: 16),
@@ -68,6 +87,13 @@ Widget createScreenshot({
                     screen: screenContents,
                   ),
                 ),
+                if (text != null && text.position.isBottom) ...[
+                  const SizedBox(height: 16),
+                  Text(
+                    text.text,
+                    style: textStyle,
+                  ),
+                ],
               ],
             ),
           ),
