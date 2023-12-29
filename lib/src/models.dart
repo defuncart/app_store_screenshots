@@ -139,10 +139,8 @@ class ScreenshotScenario {
   /// Optional background, when null default from [ScreenshotsConfig] is used
   final ScreenshotBackground? background;
 
-  /// Localized label texts
-  ///
-  /// Note: Locales need to match as specified in [ScreenshotsConfig]
-  final Map<Locale, String> text;
+  /// Text options for the screenshot
+  final ScreenshotText? text;
 
   /// Optional label TextStyle, when null default from [ScreenshotsConfig] is used
   final TextStyle? textStyle;
@@ -157,7 +155,7 @@ class ScreenshotScenario {
     this.onPostPumped,
     this.isFrameVisible = true,
     this.background,
-    required this.text,
+    this.text,
     this.textStyle,
     this.theme,
   });
@@ -172,7 +170,7 @@ class ScreenshotScenario {
         other.onPostPumped == onPostPumped &&
         other.isFrameVisible == isFrameVisible &&
         other.background == background &&
-        mapEquals(other.text, text) &&
+        other.text == text &&
         other.textStyle == textStyle &&
         other.theme == theme;
   }
@@ -224,6 +222,38 @@ class ScreenshotBackground {
 
   @override
   int get hashCode => widget.hashCode;
+}
+
+/// Text position in a screenshot
+enum ScreenshotTextPosition {
+  top,
+  bottom,
+}
+
+/// Text options for a specific screenshot
+class ScreenshotText {
+  const ScreenshotText({
+    required this.text,
+    this.position = ScreenshotTextPosition.top,
+  });
+
+  /// Localized label texts
+  ///
+  /// Note: Locales need to match as specified in [ScreenshotsConfig]
+  final Map<Locale, String> text;
+
+  /// Text position
+  final ScreenshotTextPosition position;
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotText && mapEquals(other.text, text) && other.position == position;
+  }
+
+  @override
+  int get hashCode => text.hashCode ^ position.hashCode;
 }
 
 typedef ScreenBuilder = Widget Function();
