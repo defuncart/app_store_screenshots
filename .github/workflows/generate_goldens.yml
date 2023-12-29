@@ -1,0 +1,28 @@
+name: generate_goldens
+on: workflow_dispatch
+jobs:
+  generate-goldens:
+    name: Generate Goldens
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: kuhnroyal/flutter-fvm-config-action@v1
+        id: fvm-config-action
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ steps.fvm-config-action.outputs.FLUTTER_VERSION }}
+          channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
+      - name: Install packages
+        run: dart pub get
+      - name: Generate goldens
+        run: flutter test --update-goldens --tags="golden"  --dart-define IS_CI_TEST=true
+      - name: Commit changes
+        run: |
+          if [[ -z $(git status -s) ]]; then
+            echo "No goldens changes found"
+          else
+            echo "Goldens changes found, committing"
+            git add test/.
+            git commit --message="Update goldens"
+            git push
+          fi
