@@ -22,6 +22,11 @@ void generateAppStoreScreenshots({
   FutureOr<void> Function()? onTearDown,
   bool? skip,
 }) {
+  const isCITest = bool.fromEnvironment(
+    'IS_CI_TEST',
+    defaultValue: false,
+  );
+
   for (final screen in screens) {
     final screenshotNumber = screens.indexOf(screen) + 1;
     for (final device in config.devices) {
@@ -62,9 +67,11 @@ void generateAppStoreScreenshots({
               await screen.onTearDown?.call();
               await onTearDown?.call();
 
-              // once all goldens are generated, move to target folder
-              if (screen == screens.last && device == config.devices.last && locale == config.locales.last) {
-                moveGoldens('screenshots');
+              if (!isCITest) {
+                // once all goldens are generated, move to target folder
+                if (screen == screens.last && device == config.devices.last && locale == config.locales.last) {
+                  moveGoldens('screenshots');
+                }
               }
             },
             skip: skip,
