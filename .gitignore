@@ -31,3 +31,6 @@ build/
 
 # FVM
 .fvm/flutter_sdk
+
+# Coverage
+/coverage
