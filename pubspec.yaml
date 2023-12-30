@@ -1,6 +1,7 @@
 name: app_store_screenshots
 description: A flutter tool to generate screenshots and other assets for app stores.
 version: 0.0.1
+publish_to: 'none'
 homepage: https://github.com/defuncart/app_store_screenshots
 repository: https://github.com/defuncart/app_store_screenshots
 issue_tracker: https://github.com/defuncart/app_store_screenshots/issues

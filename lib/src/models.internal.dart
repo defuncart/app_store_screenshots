@@ -21,9 +21,12 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.iOSPhone67Landscape => const Size(2796, 1290),
         DeviceType.iOSTablet129Portrait => const Size(2048, 2732),
         DeviceType.iOSTablet129Landscape => const Size(2732, 2048),
-        DeviceType.linux => const Size(1920, 1080),
-        DeviceType.macOS => const Size(1920, 1080),
-        DeviceType.windows => const Size(1920, 1080),
+        DeviceType.linuxLaptop => const Size(1920, 1080),
+        DeviceType.linuxMonitor => const Size(1920, 1080),
+        DeviceType.macOSLaptop => const Size(1920, 1080),
+        DeviceType.macOSMonitor => const Size(1920, 1080),
+        DeviceType.windowsLaptop => const Size(1920, 1080),
+        DeviceType.windowsMonitor => const Size(1920, 1080),
       };
 
   DeviceInfo get frame => switch (this) {
@@ -45,9 +48,12 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.iOSPhone67Landscape => Devices.ios.iPhone13ProMax, // should be iPhone 14 Pro Max
         DeviceType.iOSTablet129Portrait => Devices.ios.iPad12InchesGen4,
         DeviceType.iOSTablet129Landscape => Devices.ios.iPad12InchesGen4,
-        DeviceType.linux => Devices.linux.laptop,
-        DeviceType.macOS => Devices.macOS.macBookPro,
-        DeviceType.windows => Devices.windows.laptop,
+        DeviceType.linuxLaptop => Devices.linux.laptop,
+        DeviceType.linuxMonitor => Devices.linux.wideMonitor,
+        DeviceType.macOSLaptop => Devices.macOS.macBookPro,
+        DeviceType.macOSMonitor => Devices.macOS.wideMonitor,
+        DeviceType.windowsLaptop => Devices.windows.laptop,
+        DeviceType.windowsMonitor => Devices.windows.wideMonitor,
       };
 
   TargetPlatform get platform => switch (this) {
@@ -67,9 +73,12 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.iOSPhone67Landscape => TargetPlatform.iOS,
         DeviceType.iOSTablet129Portrait => TargetPlatform.iOS,
         DeviceType.iOSTablet129Landscape => TargetPlatform.iOS,
-        DeviceType.linux => TargetPlatform.linux,
-        DeviceType.macOS => TargetPlatform.macOS,
-        DeviceType.windows => TargetPlatform.windows,
+        DeviceType.linuxLaptop => TargetPlatform.linux,
+        DeviceType.linuxMonitor => TargetPlatform.linux,
+        DeviceType.macOSLaptop => TargetPlatform.macOS,
+        DeviceType.macOSMonitor => TargetPlatform.macOS,
+        DeviceType.windowsLaptop => TargetPlatform.windows,
+        DeviceType.windowsMonitor => TargetPlatform.windows,
       };
 
   Orientation get orientation => switch (this) {
@@ -89,9 +98,12 @@ extension DeviceTypeExtensions on DeviceType {
         DeviceType.iOSPhone67Landscape => Orientation.landscape,
         DeviceType.iOSTablet129Portrait => Orientation.portrait,
         DeviceType.iOSTablet129Landscape => Orientation.landscape,
-        DeviceType.linux => Orientation.landscape,
-        DeviceType.macOS => Orientation.landscape,
-        DeviceType.windows => Orientation.landscape,
+        DeviceType.linuxLaptop => Orientation.landscape,
+        DeviceType.linuxMonitor => Orientation.landscape,
+        DeviceType.macOSLaptop => Orientation.landscape,
+        DeviceType.macOSMonitor => Orientation.landscape,
+        DeviceType.windowsLaptop => Orientation.landscape,
+        DeviceType.windowsMonitor => Orientation.landscape,
       };
 }
 

@@ -53,13 +53,22 @@ enum DeviceType {
   iOSTablet129Landscape,
 
   /// Laptop running Linux
-  linux,
+  linuxLaptop,
 
-  /// Laptop running macOS
-  macOS,
+  /// Monitor running Linux
+  linuxMonitor,
 
-  /// Laptop running Windows
-  windows,
+  /// Laptop running Linux
+  macOSLaptop,
+
+  /// Monitor running Linux
+  macOSMonitor,
+
+  /// Laptop running Linux
+  windowsLaptop,
+
+  /// Monitor running Linux
+  windowsMonitor,
 }
 
 /// A base configuration used for all screenshots
