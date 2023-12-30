@@ -86,23 +86,15 @@ class ScreenshotsConfig {
   /// Optional localization delegates. Required when screens use intl.
   final Iterable<LocalizationsDelegate<dynamic>>? localizationsDelegates;
 
-  /// Background used for all screenshots (unless overridden)
-  final ScreenshotBackground background;
-
-  /// Label TextStyle used for all screenshots (unless overridden)
-  final TextStyle? textStyle;
-
-  /// Theme used for all screenshots (unless overridden)
-  final ThemeData? theme;
+  /// Layout used for all screenshots (unless overridden by scenario)
+  final ScreenshotLayout layout;
 
   /// A base configuration used for all screenshots
   ScreenshotsConfig({
     required this.devices,
     required this.locales,
     this.localizationsDelegates,
-    required this.background,
-    this.textStyle,
-    this.theme,
+    required this.layout,
   });
 
   @override
@@ -113,19 +105,56 @@ class ScreenshotsConfig {
         other.devices == devices &&
         other.locales == locales &&
         other.localizationsDelegates == localizationsDelegates &&
-        other.background == background &&
-        other.textStyle == textStyle &&
-        other.theme == theme;
+        other.layout == layout;
   }
 
   @override
   int get hashCode {
-    return devices.hashCode ^
-        locales.hashCode ^
-        localizationsDelegates.hashCode ^
-        background.hashCode ^
-        textStyle.hashCode ^
-        theme.hashCode;
+    return devices.hashCode ^ locales.hashCode ^ localizationsDelegates.hashCode ^ layout.hashCode;
+  }
+}
+
+/// Layout for all screenshots (unless overridden by scenario)
+class ScreenshotLayout {
+  /// Background
+  final ScreenshotBackground background;
+
+  /// Optional label TextStyle
+  final TextStyle? textStyle;
+
+  /// Optional theme
+  final ThemeData? theme;
+
+  /// Margin padding
+  final EdgeInsets margin;
+
+  /// Spacer between text and screen device
+  final double spacer;
+
+  /// Layout for all screenshots (unless overridden by scenario)
+  ScreenshotLayout({
+    required this.background,
+    this.textStyle,
+    this.theme,
+    this.margin = const EdgeInsets.all(48),
+    this.spacer = 16,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotLayout &&
+        other.background == background &&
+        other.textStyle == textStyle &&
+        other.theme == theme &&
+        other.margin == margin &&
+        other.spacer == spacer;
+  }
+
+  @override
+  int get hashCode {
+    return background.hashCode ^ textStyle.hashCode ^ theme.hashCode ^ margin.hashCode ^ spacer.hashCode;
   }
 }
 
@@ -157,6 +186,12 @@ class ScreenshotScenario {
   /// Optional theme, when null default from [ScreenshotsConfig] is used
   final ThemeData? theme;
 
+  /// Optional margin padding, when null default from [ScreenshotsConfig] is used
+  final EdgeInsets? margin;
+
+  /// Optional spacer between text and screen device, when null default from [ScreenshotsConfig] is used
+  final double? spacer;
+
   /// Optional size to restrict how large screen is
   final Size? screenAndFrameSize;
 
@@ -170,6 +205,8 @@ class ScreenshotScenario {
     this.text,
     this.textStyle,
     this.theme,
+    this.margin,
+    this.spacer,
     this.screenAndFrameSize,
   });
 
@@ -185,7 +222,10 @@ class ScreenshotScenario {
         other.background == background &&
         other.text == text &&
         other.textStyle == textStyle &&
-        other.theme == theme;
+        other.theme == theme &&
+        other.margin == margin &&
+        other.spacer == spacer &&
+        other.screenAndFrameSize == screenAndFrameSize;
   }
 
   @override
@@ -197,7 +237,10 @@ class ScreenshotScenario {
         background.hashCode ^
         text.hashCode ^
         textStyle.hashCode ^
-        theme.hashCode;
+        theme.hashCode ^
+        margin.hashCode ^
+        spacer.hashCode ^
+        screenAndFrameSize.hashCode;
   }
 }
 

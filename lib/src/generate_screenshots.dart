@@ -35,14 +35,16 @@ void generateAppStoreScreenshots({
               await takeScreenshot(
                 tester: tester,
                 widget: createScreenshot(
-                  background: screen.background ?? config.background,
+                  background: screen.background ?? config.layout.background,
+                  margin: screen.margin ?? config.layout.margin,
                   text: screen.text.toInternalModel(locale),
+                  spacer: screen.spacer ?? config.layout.spacer,
                   screenContents: createScreenContents(
                     onBuildScreen: screen.onBuildScreen,
                     wrapper: screen.wrapper,
                     locale: locale,
                     platform: device.platform,
-                    theme: screen.theme ?? config.theme,
+                    theme: screen.theme ?? config.layout.theme,
                     localizationsDelegates: config.localizationsDelegates,
                     supportedLocales: config.locales,
                   ),
@@ -51,7 +53,7 @@ void generateAppStoreScreenshots({
                   screenAndFrameSize: screen.screenAndFrameSize,
                   isFrameVisible: screen.isFrameVisible,
                   orientation: device.orientation,
-                  textStyle: screen.textStyle ?? config.textStyle,
+                  textStyle: screen.textStyle ?? config.layout.textStyle,
                 ),
                 onPostPumped: screen.onPostPumped,
                 name: p.join('screenshots', device.name, locale.languageCode, 'screenshot_$screenshotNumber'),

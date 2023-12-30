@@ -48,7 +48,9 @@ extension ScreenshotTextExtensions on ScreenshotText? {
 
 Widget createScreenshot({
   required ScreenshotBackground background,
+  required EdgeInsets margin,
   InternalScreenshotText? text,
+  required double spacer,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
   Size? screenAndFrameSize,
@@ -68,7 +70,7 @@ Widget createScreenshot({
           ),
           // Content
           Padding(
-            padding: const EdgeInsets.all(48),
+            padding: margin,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -78,7 +80,7 @@ Widget createScreenshot({
                     text.text,
                     style: textStyle,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: spacer),
                 ],
                 Expanded(
                   child: SizedBox(
@@ -93,7 +95,7 @@ Widget createScreenshot({
                   ),
                 ),
                 if (text != null && text.position.isBottom) ...[
-                  const SizedBox(height: 16),
+                  SizedBox(height: spacer),
                   Text(
                     text.text,
                     style: textStyle,

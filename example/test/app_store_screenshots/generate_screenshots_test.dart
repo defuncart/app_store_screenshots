@@ -26,11 +26,13 @@ void main() {
         GlobalCupertinoLocalizations.delegate,
         AppLocalizations.delegate,
       ],
-      background: ScreenshotBackground.solid(
-        color: Colors.green,
+      layout: ScreenshotLayout(
+        background: ScreenshotBackground.solid(
+          color: Colors.green,
+        ),
+        theme: lightTheme,
+        textStyle: textStyle,
       ),
-      theme: lightTheme,
-      textStyle: textStyle,
     ),
     screens: [
       ScreenshotScenario(
