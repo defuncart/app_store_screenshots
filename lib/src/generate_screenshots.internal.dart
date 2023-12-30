@@ -51,6 +51,7 @@ Widget createScreenshot({
   InternalScreenshotText? text,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
+  Size? screenAndFrameSize,
   required bool isFrameVisible,
   required Orientation orientation,
   required double height,
@@ -80,11 +81,15 @@ Widget createScreenshot({
                   const SizedBox(height: 16),
                 ],
                 Expanded(
-                  child: DeviceFrame(
-                    device: deviceFrame,
-                    isFrameVisible: isFrameVisible,
-                    orientation: orientation,
-                    screen: screenContents,
+                  child: SizedBox(
+                    width: screenAndFrameSize?.width,
+                    height: screenAndFrameSize?.height,
+                    child: DeviceFrame(
+                      device: deviceFrame,
+                      isFrameVisible: isFrameVisible,
+                      orientation: orientation,
+                      screen: screenContents,
+                    ),
                   ),
                 ),
                 if (text != null && text.position.isBottom) ...[

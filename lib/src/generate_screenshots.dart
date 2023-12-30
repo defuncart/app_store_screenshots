@@ -48,6 +48,7 @@ void generateAppStoreScreenshots({
                   ),
                   height: device.size.height,
                   deviceFrame: device.frame,
+                  screenAndFrameSize: screen.screenAndFrameSize,
                   isFrameVisible: screen.isFrameVisible,
                   orientation: device.orientation,
                   textStyle: screen.textStyle ?? config.textStyle,

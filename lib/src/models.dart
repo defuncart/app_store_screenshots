@@ -157,6 +157,9 @@ class ScreenshotScenario {
   /// Optional theme, when null default from [ScreenshotsConfig] is used
   final ThemeData? theme;
 
+  /// Optional size to restrict how large screen is
+  final Size? screenAndFrameSize;
+
   /// A scenario for a specific screenshot
   ScreenshotScenario({
     required this.onBuildScreen,
@@ -167,6 +170,7 @@ class ScreenshotScenario {
     this.text,
     this.textStyle,
     this.theme,
+    this.screenAndFrameSize,
   });
 
   @override
