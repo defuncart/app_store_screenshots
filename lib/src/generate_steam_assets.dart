@@ -46,6 +46,27 @@ void generateStreamCover({
   );
 }
 
+/// Generates a 1290x620 logo art for a program in steam launcher
+@isTest
+void generateStreamLogo({
+  required AssetBuilder onBuildLogo,
+  bool? skip,
+}) {
+  const size = Size(650, 248);
+  const filename = 'steam/logo';
+  const outputDirectory = 'steam';
+
+  generateCustomAsset(
+    'Generate Steam logo',
+    size: size,
+    content: onBuildLogo(size),
+    filename: filename,
+    outputDirectory: outputDirectory,
+    replaceAllFiles: false,
+    skip: skip,
+  );
+}
+
 /// Generates a 1290x620 background art for a program in steam launcher
 @isTest
 void generateStreamBackground({

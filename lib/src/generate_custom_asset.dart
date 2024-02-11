@@ -34,6 +34,14 @@ void generateCustomAsset(
             child: content,
           ),
           surfaceSize: size,
+          // incase background is transparent
+          wrapper: (child) => MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Material(
+              color: Colors.transparent,
+              child: child,
+            ),
+          ),
         );
         await screenMatchesGolden(tester, filename);
 

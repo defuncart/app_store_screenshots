@@ -180,6 +180,14 @@ generateStreamCover(
 <td>
 
 ```dart
+generateStreamLogo(
+  onBuildLogo: (size) => const SteamLogo(),
+);
+```
+</td><td><img src="example/assets_dev/steam/logo.png" alt="image" width="64" height="auto"></td></tr>
+<td>
+
+```dart
 generateStreamBackground(
   onBuildBackground: (size) => const SteamBackground(),
 );

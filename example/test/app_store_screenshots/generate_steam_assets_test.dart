@@ -22,6 +22,16 @@ void main() {
     ),
   );
 
+  generateStreamLogo(
+    onBuildLogo: (size) => Theme(
+      data: theme,
+      child: SteamAsset(
+        size: size,
+        isTransparent: true,
+      ),
+    ),
+  );
+
   generateStreamBackground(
     onBuildBackground: (size) => Theme(
       data: theme,
@@ -36,16 +46,18 @@ class SteamAsset extends StatelessWidget {
   const SteamAsset({
     super.key,
     required this.size,
+    this.isTransparent = false,
   });
 
   final Size size;
+  final bool isTransparent;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: size.width,
       height: size.height,
-      color: Theme.of(context).scaffoldBackgroundColor,
+      color: isTransparent ? Colors.transparent : Theme.of(context).scaffoldBackgroundColor,
       child: Center(
         child: Icon(
           Icons.flutter_dash,
