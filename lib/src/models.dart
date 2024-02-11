@@ -265,3 +265,5 @@ typedef PostPumpCallback = Future<void> Function(WidgetTester);
 typedef AppIconBuilder = Widget Function();
 
 typedef GooglePlayFeatureGraphicBuilder = Widget Function(Locale);
+
+typedef AssetBuilder = Widget Function(Size);
