@@ -42,7 +42,7 @@ dev_dependency:
 `generateAppStoreScreenshots` can be used to generate screenshots for a given `ScreenshotsConfig` and `List<ScreenshotScenario>`.
 
 ```dart
-final config =ScreenshotsConfig(
+final config = ScreenshotsConfig(
   devices: [DeviceType.androidPhonePortrait, DeviceType.iOSPhone67Portrait],
   locales: AppLocalizations.supportedLocales,
   localizationsDelegates: [
@@ -80,7 +80,7 @@ void main() {
 }
 ```
 
-Screenshots can be found in `assets_dev/screenshots`.
+Screenshots can be found in [example/assets_dev/screenshots/](example/assets_dev/screenshots/).
 
 See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/test/app_store_screenshots/generate_screenshots_test.dart) for full example.
 
@@ -139,7 +139,7 @@ generateAppIconAndroidForeground(
 </tr>
 </table>
 
-Icons can be found in `assets_dev/app_icons`. [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) could then be used to update the launcher icons for targeted platforms.
+Icons can be found in [example/assets_dev/app_icons/](example/assets_dev/app_icons/). [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) could then be used to update the launcher icons for targeted platforms.
 
 See [example/test/app_store_screenshots/generate_app_icons_test.dart](example/test/app_store_screenshots/generate_app_icons_test.dart) for full example.
 
@@ -152,9 +152,52 @@ See [example/test/app_store_screenshots/generate_app_icons_test.dart](example/te
 <td><img src="example/assets_dev/google_play_assets/google_play_feature_graphic_en.png" alt="image" width="250" height="auto"></td>
 </tr></table>
 
-Assets can be found in `assets_dev/google_play_assets`. 
+Assets can be found in [example/assets_dev/google_play_assets/](example/assets_dev/google_play_assets/).
 
 See [example/test/app_store_screenshots/generate_google_play_assets_test.dart](example/test/app_store_screenshots/generate_google_play_assets_test.dart) for full example.
+
+### Steam Assets
+
+Icon, Cover and Background assets for programs in Steam Launcher can be generated as follows:
+
+<table>
+<tr><td>
+
+```dart
+generateStreamLogo(
+  onBuildIcon: (size) => const SteamIcon(),
+);
+```
+</td><td><img src="example/assets_dev/steam/icon.png" alt="image" width="64" height="auto"></td></tr>
+<td>
+
+```dart
+generateStreamCover(
+  onBuildCover: (size) => const SteamCover(),
+);
+```
+</td><td><img src="example/assets_dev/steam/cover.png" alt="image" width="64" height="auto"></td></tr>
+<td>
+
+```dart
+generateStreamLogo(
+  onBuildLogo: (size) => const SteamLogo(),
+);
+```
+</td><td><img src="example/assets_dev/steam/logo.png" alt="image" width="64" height="auto"></td></tr>
+<td>
+
+```dart
+generateStreamBackground(
+  onBuildBackground: (size) => const SteamBackground(),
+);
+```
+</td><td><img src="example/assets_dev/steam/background.png" alt="image" width="64" height="auto"></td></tr>
+</table>
+
+Assets can be found in [example/assets_dev/steam/](example/assets_dev/steam/).
+
+See [example/test/app_store_screenshots/generate_steam_assets_test.dart](example/test/app_store_screenshots/generate_steam_assets_test.dart) for full example.
 
 ## Roadmap
 
