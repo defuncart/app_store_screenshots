@@ -31,6 +31,8 @@ Widget createScreenContents({
 typedef InternalScreenshotText = ({
   String text,
   ScreenshotTextPosition position,
+  double spacer,
+  TextAlign? textAlign,
 });
 
 extension ScreenshotTextExtensions on ScreenshotText? {
@@ -42,6 +44,8 @@ extension ScreenshotTextExtensions on ScreenshotText? {
     return (
       text: this!.text[locale]!,
       position: this!.position,
+      spacer: this!.spacer,
+      textAlign: this!.textAlign,
     );
   }
 }
@@ -75,9 +79,10 @@ Widget createScreenshot({
                 if (text != null && text.position.isTop) ...[
                   Text(
                     text.text,
+                    textAlign: text.textAlign,
                     style: textStyle,
                   ),
-                  const SizedBox(height: 16),
+                  SizedBox(height: text.spacer),
                 ],
                 Expanded(
                   child: DeviceFrame(
@@ -88,9 +93,10 @@ Widget createScreenshot({
                   ),
                 ),
                 if (text != null && text.position.isBottom) ...[
-                  const SizedBox(height: 16),
+                  SizedBox(height: text.spacer),
                   Text(
                     text.text,
+                    textAlign: text.textAlign,
                     style: textStyle,
                   ),
                 ],

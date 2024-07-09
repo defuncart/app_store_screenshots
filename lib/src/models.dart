@@ -249,6 +249,8 @@ class ScreenshotText {
   const ScreenshotText({
     required this.text,
     this.position = ScreenshotTextPosition.top,
+    this.spacer = 16,
+    this.textAlign,
   });
 
   /// Localized label texts
@@ -259,15 +261,27 @@ class ScreenshotText {
   /// Text position
   final ScreenshotTextPosition position;
 
+  /// Spacer between screen and text, defaults to 16
+  final double spacer;
+
+  /// Optional text alignment
+  final TextAlign? textAlign;
+
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is ScreenshotText && mapEquals(other.text, text) && other.position == position;
+    return other is ScreenshotText &&
+        mapEquals(other.text, text) &&
+        other.position == position &&
+        other.spacer == spacer &&
+        other.textAlign == textAlign;
   }
 
   @override
-  int get hashCode => text.hashCode ^ position.hashCode;
+  int get hashCode {
+    return text.hashCode ^ position.hashCode ^ spacer.hashCode ^ textAlign.hashCode;
+  }
 }
 
 typedef ScreenBuilder = Widget Function();
