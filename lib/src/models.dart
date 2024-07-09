@@ -122,6 +122,9 @@ class ScreenshotsConfig {
 
 /// A scenario for a specific screenshot
 class ScreenshotScenario {
+  /// Optional callback before screen is generated
+  void Function(Locale)? onSetUp;
+
   /// Callback to build the screen
   final ScreenBuilder onBuildScreen;
 
@@ -142,6 +145,9 @@ class ScreenshotScenario {
   /// Text options for the screenshot
   final ScreenshotText? text;
 
+  /// Optional callback after screen is generated
+  VoidCallback? onTearDown;
+
   /// Optional label TextStyle, when null default from [ScreenshotsConfig] is used
   final TextStyle? textStyle;
 
@@ -150,9 +156,11 @@ class ScreenshotScenario {
 
   /// A scenario for a specific screenshot
   ScreenshotScenario({
+    this.onSetUp,
     required this.onBuildScreen,
     this.wrapper,
     this.onPostPumped,
+    this.onTearDown,
     this.isFrameVisible = true,
     this.background,
     this.text,
@@ -165,24 +173,28 @@ class ScreenshotScenario {
     if (identical(this, other)) return true;
 
     return other is ScreenshotScenario &&
+        other.onSetUp == onSetUp &&
         other.onBuildScreen == onBuildScreen &&
         other.wrapper == wrapper &&
         other.onPostPumped == onPostPumped &&
         other.isFrameVisible == isFrameVisible &&
         other.background == background &&
         other.text == text &&
+        other.onTearDown == onTearDown &&
         other.textStyle == textStyle &&
         other.theme == theme;
   }
 
   @override
   int get hashCode {
-    return onBuildScreen.hashCode ^
+    return onSetUp.hashCode ^
+        onBuildScreen.hashCode ^
         wrapper.hashCode ^
         onPostPumped.hashCode ^
         isFrameVisible.hashCode ^
         background.hashCode ^
         text.hashCode ^
+        onTearDown.hashCode ^
         textStyle.hashCode ^
         theme.hashCode;
   }

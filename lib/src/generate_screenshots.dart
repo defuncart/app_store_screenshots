@@ -31,6 +31,7 @@ void generateAppStoreScreenshots({
             (tester) async {
               await loadAppFonts();
               onSetUp?.call();
+              screen.onSetUp?.call(locale);
 
               await takeScreenshot(
                 tester: tester,
@@ -57,6 +58,7 @@ void generateAppStoreScreenshots({
                 size: device.size,
               );
 
+              screen.onTearDown?.call();
               onTearDown?.call();
 
               // once all goldens are generated, move to target folder
