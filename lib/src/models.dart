@@ -147,14 +147,14 @@ class ScreenshotScenario {
   /// Text options for the screenshot
   final ScreenshotText? text;
 
-  /// Optional callback after screen is generated
-  VoidCallback? onTearDown;
-
   /// Optional label TextStyle, when null default from [ScreenshotsConfig] is used
   final TextStyle? textStyle;
 
   /// Optional theme, when null default from [ScreenshotsConfig] is used
   final ThemeData? theme;
+
+  /// Optional callback after screen is generated
+  FutureOr<void> Function()? onTearDown;
 
   /// A scenario for a specific screenshot
   ScreenshotScenario({
@@ -162,12 +162,12 @@ class ScreenshotScenario {
     required this.onBuildScreen,
     this.wrapper,
     this.onPostPumped,
-    this.onTearDown,
     this.isFrameVisible = true,
     this.background,
     this.text,
     this.textStyle,
     this.theme,
+    this.onTearDown,
   });
 
   @override
@@ -182,9 +182,9 @@ class ScreenshotScenario {
         other.isFrameVisible == isFrameVisible &&
         other.background == background &&
         other.text == text &&
-        other.onTearDown == onTearDown &&
         other.textStyle == textStyle &&
-        other.theme == theme;
+        other.theme == theme &&
+        other.onTearDown == onTearDown;
   }
 
   @override
@@ -196,9 +196,9 @@ class ScreenshotScenario {
         isFrameVisible.hashCode ^
         background.hashCode ^
         text.hashCode ^
-        onTearDown.hashCode ^
         textStyle.hashCode ^
-        theme.hashCode;
+        theme.hashCode ^
+        onTearDown.hashCode;
   }
 }
 

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
@@ -20,7 +19,7 @@ void generateAppStoreScreenshots({
   FutureOr<void> Function()? onSetUp,
   required ScreenshotsConfig config,
   required List<ScreenshotScenario> screens,
-  VoidCallback? onTearDown,
+  FutureOr<void> Function()? onTearDown,
   bool? skip,
 }) {
   for (final screen in screens) {
@@ -60,8 +59,8 @@ void generateAppStoreScreenshots({
                 size: device.size,
               );
 
-              screen.onTearDown?.call();
-              onTearDown?.call();
+              await screen.onTearDown?.call();
+              await onTearDown?.call();
 
               // once all goldens are generated, move to target folder
               if (screen == screens.last && device == config.devices.last && locale == config.locales.last) {
