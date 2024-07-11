@@ -30,7 +30,9 @@ void main() {
         color: Colors.green,
       ),
       theme: lightTheme,
-      textStyle: textStyle,
+      textOptions: const ScreenshotTextOptions(
+        textStyle: textStyle,
+      ),
     ),
     screens: [
       ScreenshotScenario(

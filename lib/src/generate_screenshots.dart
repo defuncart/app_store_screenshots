@@ -37,9 +37,9 @@ void generateAppStoreScreenshots({
               await takeScreenshot(
                 tester: tester,
                 widget: createScreenshot(
-                  locale: locale,
                   background: screen.background ?? config.background,
-                  text: screen.text,
+                  text: screen.text?.onGenerateText(locale),
+                  textOptions: screen.text?.options ?? config.textOptions,
                   screenContents: createScreenContents(
                     onBuildScreen: screen.onBuildScreen,
                     wrapper: screen.wrapper,
@@ -53,7 +53,6 @@ void generateAppStoreScreenshots({
                   deviceFrame: device.frame,
                   isFrameVisible: screen.isFrameVisible,
                   orientation: device.orientation,
-                  textStyle: screen.textStyle ?? config.textStyle,
                 ),
                 onPostPumped: screen.onPostPumped,
                 name: p.join('screenshots', device.name, locale.languageCode, 'screenshot_$screenshotNumber'),
