@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -244,19 +243,19 @@ enum ScreenshotTextPosition {
   bottom,
 }
 
+typedef LocalizedTextGenerator = String Function(Locale);
+
 /// Text options for a specific screenshot
 class ScreenshotText {
   const ScreenshotText({
-    required this.text,
+    required this.onGenerateText,
     this.position = ScreenshotTextPosition.top,
     this.spacer = 16,
     this.textAlign,
   });
 
-  /// Localized label texts
-  ///
-  /// Note: Locales need to match as specified in [ScreenshotsConfig]
-  final Map<Locale, String> text;
+  /// A function to generate the localized label text
+  final LocalizedTextGenerator onGenerateText;
 
   /// Text position
   final ScreenshotTextPosition position;
@@ -272,7 +271,7 @@ class ScreenshotText {
     if (identical(this, other)) return true;
 
     return other is ScreenshotText &&
-        mapEquals(other.text, text) &&
+        other.onGenerateText == onGenerateText &&
         other.position == position &&
         other.spacer == spacer &&
         other.textAlign == textAlign;
@@ -280,8 +279,12 @@ class ScreenshotText {
 
   @override
   int get hashCode {
-    return text.hashCode ^ position.hashCode ^ spacer.hashCode ^ textAlign.hashCode;
+    return onGenerateText.hashCode ^ position.hashCode ^ spacer.hashCode ^ textAlign.hashCode;
   }
+}
+
+class ScreenshotUnsupportedLocale extends ArgumentError {
+  ScreenshotUnsupportedLocale(Locale locale) : super.value(locale, '', 'Unsupported Locale');
 }
 
 typedef ScreenBuilder = Widget Function();

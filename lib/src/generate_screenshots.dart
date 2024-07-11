@@ -37,8 +37,9 @@ void generateAppStoreScreenshots({
               await takeScreenshot(
                 tester: tester,
                 widget: createScreenshot(
+                  locale: locale,
                   background: screen.background ?? config.background,
-                  text: screen.text.toInternalModel(locale),
+                  text: screen.text,
                   screenContents: createScreenContents(
                     onBuildScreen: screen.onBuildScreen,
                     wrapper: screen.wrapper,

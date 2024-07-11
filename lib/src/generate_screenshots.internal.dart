@@ -28,31 +28,10 @@ Widget createScreenContents({
   return wrapper != null ? wrapper(widget) : widget;
 }
 
-typedef InternalScreenshotText = ({
-  String text,
-  ScreenshotTextPosition position,
-  double spacer,
-  TextAlign? textAlign,
-});
-
-extension ScreenshotTextExtensions on ScreenshotText? {
-  InternalScreenshotText? toInternalModel(Locale locale) {
-    if (this == null || !this!.text.containsKey(locale)) {
-      return null;
-    }
-
-    return (
-      text: this!.text[locale]!,
-      position: this!.position,
-      spacer: this!.spacer,
-      textAlign: this!.textAlign,
-    );
-  }
-}
-
 Widget createScreenshot({
+  required Locale locale,
   required ScreenshotBackground background,
-  InternalScreenshotText? text,
+  ScreenshotText? text,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
   required bool isFrameVisible,
@@ -78,7 +57,7 @@ Widget createScreenshot({
               children: [
                 if (text != null && text.position.isTop) ...[
                   Text(
-                    text.text,
+                    text.onGenerateText(locale),
                     textAlign: text.textAlign,
                     style: textStyle,
                   ),
@@ -95,7 +74,7 @@ Widget createScreenshot({
                 if (text != null && text.position.isBottom) ...[
                   SizedBox(height: text.spacer),
                   Text(
-                    text.text,
+                    text.onGenerateText(locale),
                     textAlign: text.textAlign,
                     style: textStyle,
                   ),
