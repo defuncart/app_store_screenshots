@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -123,7 +125,7 @@ class ScreenshotsConfig {
 /// A scenario for a specific screenshot
 class ScreenshotScenario {
   /// Optional callback before screen is generated
-  void Function(Locale)? onSetUp;
+  FutureOr<void> Function(Locale)? onSetUp;
 
   /// Callback to build the screen
   final ScreenBuilder onBuildScreen;

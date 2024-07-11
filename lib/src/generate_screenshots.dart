@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
@@ -15,7 +17,7 @@ import 'models.internal.dart';
 /// [onTearDown] is called after each screen has been generated
 @isTest
 void generateAppStoreScreenshots({
-  VoidCallback? onSetUp,
+  FutureOr<void> Function()? onSetUp,
   required ScreenshotsConfig config,
   required List<ScreenshotScenario> screens,
   VoidCallback? onTearDown,
@@ -30,8 +32,8 @@ void generateAppStoreScreenshots({
             'Generate screenshot $screenshotNumber ${device.name} $locale',
             (tester) async {
               await loadAppFonts();
-              onSetUp?.call();
-              screen.onSetUp?.call(locale);
+              await onSetUp?.call();
+              await screen.onSetUp?.call(locale);
 
               await takeScreenshot(
                 tester: tester,
