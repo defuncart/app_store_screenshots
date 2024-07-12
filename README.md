@@ -63,9 +63,10 @@ final config = ScreenshotsConfig(
 final screens = [
   ScreenshotScenario(
     onBuildScreen: () => const Page1(),
-    text: {
-      const Locale('en'): 'Light mode',
-      const Locale('de'): 'Hellmodus',
+    onGenerateText: (locale) => switch (locale) {
+      const Locale('en') => 'Light mode',
+      const Locale('de') => 'Hellmodus',
+      _ => throw ScreenshotUnsupportedLocale(locale),
     },
   ),
 ];

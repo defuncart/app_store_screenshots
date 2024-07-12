@@ -1,4 +1,5 @@
-import 'package:flutter/foundation.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -80,8 +81,8 @@ class ScreenshotsConfig {
   /// Background used for all screenshots (unless overridden)
   final ScreenshotBackground background;
 
-  /// Label TextStyle used for all screenshots (unless overridden)
-  final TextStyle? textStyle;
+  /// Text options for all screenshots (unless overridden)
+  final ScreenshotTextOptions? textOptions;
 
   /// Theme used for all screenshots (unless overridden)
   final ThemeData? theme;
@@ -92,7 +93,7 @@ class ScreenshotsConfig {
     required this.locales,
     this.localizationsDelegates,
     required this.background,
-    this.textStyle,
+    this.textOptions,
     this.theme,
   });
 
@@ -105,7 +106,7 @@ class ScreenshotsConfig {
         other.locales == locales &&
         other.localizationsDelegates == localizationsDelegates &&
         other.background == background &&
-        other.textStyle == textStyle &&
+        other.textOptions == textOptions &&
         other.theme == theme;
   }
 
@@ -115,13 +116,16 @@ class ScreenshotsConfig {
         locales.hashCode ^
         localizationsDelegates.hashCode ^
         background.hashCode ^
-        textStyle.hashCode ^
+        textOptions.hashCode ^
         theme.hashCode;
   }
 }
 
 /// A scenario for a specific screenshot
 class ScreenshotScenario {
+  /// Optional callback before screen is generated
+  FutureOr<void> Function(Locale)? onSetUp;
+
   /// Callback to build the screen
   final ScreenBuilder onBuildScreen;
 
@@ -139,25 +143,26 @@ class ScreenshotScenario {
   /// Optional background, when null default from [ScreenshotsConfig] is used
   final ScreenshotBackground? background;
 
-  /// Text options for the screenshot
+  /// Text for the screenshot
   final ScreenshotText? text;
-
-  /// Optional label TextStyle, when null default from [ScreenshotsConfig] is used
-  final TextStyle? textStyle;
 
   /// Optional theme, when null default from [ScreenshotsConfig] is used
   final ThemeData? theme;
 
+  /// Optional callback after screen is generated
+  FutureOr<void> Function()? onTearDown;
+
   /// A scenario for a specific screenshot
   ScreenshotScenario({
+    this.onSetUp,
     required this.onBuildScreen,
     this.wrapper,
     this.onPostPumped,
     this.isFrameVisible = true,
     this.background,
     this.text,
-    this.textStyle,
     this.theme,
+    this.onTearDown,
   });
 
   @override
@@ -165,26 +170,28 @@ class ScreenshotScenario {
     if (identical(this, other)) return true;
 
     return other is ScreenshotScenario &&
+        other.onSetUp == onSetUp &&
         other.onBuildScreen == onBuildScreen &&
         other.wrapper == wrapper &&
         other.onPostPumped == onPostPumped &&
         other.isFrameVisible == isFrameVisible &&
         other.background == background &&
         other.text == text &&
-        other.textStyle == textStyle &&
-        other.theme == theme;
+        other.theme == theme &&
+        other.onTearDown == onTearDown;
   }
 
   @override
   int get hashCode {
-    return onBuildScreen.hashCode ^
+    return onSetUp.hashCode ^
+        onBuildScreen.hashCode ^
         wrapper.hashCode ^
         onPostPumped.hashCode ^
         isFrameVisible.hashCode ^
         background.hashCode ^
         text.hashCode ^
-        textStyle.hashCode ^
-        theme.hashCode;
+        theme.hashCode ^
+        onTearDown.hashCode;
   }
 }
 
@@ -230,30 +237,72 @@ enum ScreenshotTextPosition {
   bottom,
 }
 
-/// Text options for a specific screenshot
-class ScreenshotText {
-  const ScreenshotText({
-    required this.text,
-    this.position = ScreenshotTextPosition.top,
-  });
-
-  /// Localized label texts
-  ///
-  /// Note: Locales need to match as specified in [ScreenshotsConfig]
-  final Map<Locale, String> text;
-
+/// Text options for a screenshot
+class ScreenshotTextOptions {
   /// Text position
   final ScreenshotTextPosition position;
+
+  /// Optional text style
+  final TextStyle? textStyle;
+
+  /// Spacer between screen and text, defaults to 16
+  final double spacer;
+
+  /// Optional text alignment
+  final TextAlign? textAlign;
+
+  const ScreenshotTextOptions({
+    this.position = ScreenshotTextPosition.top,
+    this.textStyle,
+    this.spacer = 16,
+    this.textAlign,
+  });
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is ScreenshotText && mapEquals(other.text, text) && other.position == position;
+    return other is ScreenshotTextOptions &&
+        other.position == position &&
+        other.textStyle == textStyle &&
+        other.spacer == spacer &&
+        other.textAlign == textAlign;
   }
 
   @override
-  int get hashCode => text.hashCode ^ position.hashCode;
+  int get hashCode {
+    return position.hashCode ^ textStyle.hashCode ^ spacer.hashCode ^ textAlign.hashCode;
+  }
+}
+
+typedef LocalizedTextGenerator = String Function(Locale);
+
+/// Text for a specific screenshot
+class ScreenshotText {
+  /// A function to generate the localized label text
+  final LocalizedTextGenerator onGenerateText;
+
+  /// Text options, when null default from [ScreenshotConfig] is used
+  final ScreenshotTextOptions? options;
+
+  const ScreenshotText({
+    required this.onGenerateText,
+    this.options,
+  });
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is ScreenshotText && other.onGenerateText == onGenerateText && other.options == options;
+  }
+
+  @override
+  int get hashCode => onGenerateText.hashCode ^ options.hashCode;
+}
+
+class ScreenshotUnsupportedLocale extends ArgumentError {
+  ScreenshotUnsupportedLocale(Locale locale) : super.value(locale, '', 'Unsupported Locale');
 }
 
 typedef ScreenBuilder = Widget Function();

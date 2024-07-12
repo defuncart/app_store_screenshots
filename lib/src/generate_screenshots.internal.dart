@@ -28,78 +28,65 @@ Widget createScreenContents({
   return wrapper != null ? wrapper(widget) : widget;
 }
 
-typedef InternalScreenshotText = ({
-  String text,
-  ScreenshotTextPosition position,
-});
-
-extension ScreenshotTextExtensions on ScreenshotText? {
-  InternalScreenshotText? toInternalModel(Locale locale) {
-    if (this == null || !this!.text.containsKey(locale)) {
-      return null;
-    }
-
-    return (
-      text: this!.text[locale]!,
-      position: this!.position,
-    );
-  }
-}
-
 Widget createScreenshot({
   required ScreenshotBackground background,
-  InternalScreenshotText? text,
+  String? text,
+  ScreenshotTextOptions? textOptions,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
   required bool isFrameVisible,
   required Orientation orientation,
   required double height,
-  TextStyle? textStyle,
-}) =>
-    SizedBox(
-      height: height,
-      child: Stack(
-        alignment: Alignment.topCenter,
-        children: [
-          // Background
-          SizedBox.expand(
-            child: background.widget,
-          ),
-          // Content
-          Padding(
-            padding: const EdgeInsets.all(48),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                if (text != null && text.position.isTop) ...[
-                  Text(
-                    text.text,
-                    style: textStyle,
-                  ),
-                  const SizedBox(height: 16),
-                ],
-                Expanded(
-                  child: DeviceFrame(
-                    device: deviceFrame,
-                    isFrameVisible: isFrameVisible,
-                    orientation: orientation,
-                    screen: screenContents,
-                  ),
+}) {
+  final effectiveTextOptions = textOptions ?? const ScreenshotTextOptions();
+
+  return SizedBox(
+    height: height,
+    child: Stack(
+      alignment: Alignment.topCenter,
+      children: [
+        // Background
+        SizedBox.expand(
+          child: background.widget,
+        ),
+        // Content
+        Padding(
+          padding: const EdgeInsets.all(48),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (text != null && effectiveTextOptions.position.isTop) ...[
+                Text(
+                  text,
+                  textAlign: effectiveTextOptions.textAlign,
+                  style: effectiveTextOptions.textStyle,
                 ),
-                if (text != null && text.position.isBottom) ...[
-                  const SizedBox(height: 16),
-                  Text(
-                    text.text,
-                    style: textStyle,
-                  ),
-                ],
+                SizedBox(height: effectiveTextOptions.spacer),
               ],
-            ),
+              Expanded(
+                child: DeviceFrame(
+                  device: deviceFrame,
+                  isFrameVisible: isFrameVisible,
+                  orientation: orientation,
+                  screen: screenContents,
+                ),
+              ),
+              if (text != null && effectiveTextOptions.position.isBottom) ...[
+                SizedBox(height: effectiveTextOptions.spacer),
+                Text(
+                  text,
+                  textAlign: effectiveTextOptions.textAlign,
+                  style: effectiveTextOptions.textStyle,
+                ),
+              ],
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+      ],
+    ),
+  );
+}
 
 Future<void> takeScreenshot({
   required WidgetTester tester,

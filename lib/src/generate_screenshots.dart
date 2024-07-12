@@ -1,4 +1,5 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
@@ -15,10 +16,10 @@ import 'models.internal.dart';
 /// [onTearDown] is called after each screen has been generated
 @isTest
 void generateAppStoreScreenshots({
-  VoidCallback? onSetUp,
+  FutureOr<void> Function()? onSetUp,
   required ScreenshotsConfig config,
   required List<ScreenshotScenario> screens,
-  VoidCallback? onTearDown,
+  FutureOr<void> Function()? onTearDown,
   bool? skip,
 }) {
   for (final screen in screens) {
@@ -30,13 +31,15 @@ void generateAppStoreScreenshots({
             'Generate screenshot $screenshotNumber ${device.name} $locale',
             (tester) async {
               await loadAppFonts();
-              onSetUp?.call();
+              await onSetUp?.call();
+              await screen.onSetUp?.call(locale);
 
               await takeScreenshot(
                 tester: tester,
                 widget: createScreenshot(
                   background: screen.background ?? config.background,
-                  text: screen.text.toInternalModel(locale),
+                  text: screen.text?.onGenerateText(locale),
+                  textOptions: screen.text?.options ?? config.textOptions,
                   screenContents: createScreenContents(
                     onBuildScreen: screen.onBuildScreen,
                     wrapper: screen.wrapper,
@@ -50,14 +53,14 @@ void generateAppStoreScreenshots({
                   deviceFrame: device.frame,
                   isFrameVisible: screen.isFrameVisible,
                   orientation: device.orientation,
-                  textStyle: screen.textStyle ?? config.textStyle,
                 ),
                 onPostPumped: screen.onPostPumped,
                 name: p.join('screenshots', device.name, locale.languageCode, 'screenshot_$screenshotNumber'),
                 size: device.size,
               );
 
-              onTearDown?.call();
+              await screen.onTearDown?.call();
+              await onTearDown?.call();
 
               // once all goldens are generated, move to target folder
               if (screen == screens.last && device == config.devices.last && locale == config.locales.last) {
