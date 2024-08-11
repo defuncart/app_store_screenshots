@@ -3,15 +3,21 @@ import 'package:flutter/material.dart';
 
 void main() {
   generateAppIcon(
-    onBuildIcon: () => const AppIcon(
-      size: 512,
+    onBuildIcon: (size) => AppIcon(
+      size: size,
     ),
   );
 
   generateAppIconAndroidForeground(
-    onBuildIcon: () => const AppIcon(
-      size: 512,
+    onBuildIcon: (size) => AppIcon(
+      size: size,
       hasTransparentBackground: true,
+    ),
+  );
+
+  generateAppIconMacOS(
+    onBuildIcon: (size) => AppIcon(
+      size: size,
     ),
   );
 }

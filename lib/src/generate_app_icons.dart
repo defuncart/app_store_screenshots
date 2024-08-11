@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
@@ -21,7 +22,7 @@ void generateAppIcon({
         await tester.pumpWidgetBuilder(
           SizedBox.fromSize(
             size: size,
-            child: onBuildIcon(),
+            child: onBuildIcon(size.shortestSide),
           ),
           surfaceSize: size,
         );
@@ -55,7 +56,7 @@ void generateAppIconAndroidForeground({
             size: size,
             child: Padding(
               padding: padding,
-              child: onBuildIcon(),
+              child: onBuildIcon(size.shortestSide),
             ),
           ),
           surfaceSize: size,
@@ -68,6 +69,62 @@ void generateAppIconAndroidForeground({
           ),
         );
         await screenMatchesGolden(tester, 'app_icons/android_icon_foreground');
+
+        moveGoldens('app_icons', replaceAllFiles: false);
+      },
+      skip: skip,
+    ),
+  );
+}
+
+/// Generates a 824x macOS app icon in a 1024x frame with rounded edges and shadows saved to `assets_dev/app_icons`
+@isTest
+void generateAppIconMacOS({
+  required AppIconBuilder onBuildIcon,
+  bool? skip,
+}) {
+  testGoldensWithShadows(
+    () => testGoldens(
+      'Generate macOS icon',
+      (tester) async {
+        await loadAppFonts();
+
+        const surfaceSize = Size(1024, 1024);
+        const iconSize = Size(824, 824);
+        final iconBorderRadius = BorderRadius.circular(iconSize.width * 0.2237);
+        await tester.pumpWidgetBuilder(
+          SizedBox.fromSize(
+            size: surfaceSize,
+            child: Center(
+              child: SizedBox.fromSize(
+                size: iconSize,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: iconBorderRadius,
+                    boxShadow: [
+                      BoxShadow(
+                        color: const Color(0xff000000).withOpacity(0.3),
+                        offset: const Offset(0.0, 10.0),
+                        blurRadius: 10.0,
+                      ),
+                    ],
+                  ),
+                  // sha
+                  child: ClipRRect(
+                    borderRadius: iconBorderRadius,
+                    child: onBuildIcon(iconSize.shortestSide),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          surfaceSize: surfaceSize,
+          wrapper: (child) => CupertinoApp(
+            debugShowCheckedModeBanner: false,
+            home: child,
+          ),
+        );
+        await screenMatchesGolden(tester, 'app_icons/app_icon_macos');
 
         moveGoldens('app_icons', replaceAllFiles: false);
       },

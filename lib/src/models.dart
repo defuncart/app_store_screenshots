@@ -311,7 +311,7 @@ typedef ScreenWrapper = Widget Function(Widget);
 
 typedef PostPumpCallback = Future<void> Function(WidgetTester);
 
-typedef AppIconBuilder = Widget Function();
+typedef AppIconBuilder = Widget Function(double);
 
 typedef GooglePlayFeatureGraphicBuilder = Widget Function(Locale);
 

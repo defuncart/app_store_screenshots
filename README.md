@@ -113,15 +113,15 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 
 ### App Icon
 
-Given an `AppIcon` widget, `generateAppIcon` and `generateAppIconAndroidForeground` can be used to generated 512x512 app icons and android foreground:
+Given an `AppIcon` widget, `generateAppIcon` and `generateAppIconAndroidForeground` can be used to generated 512x512 app icons and android foreground, while `generateAppIconMacOS` can be used to generate a 824x macOS app icon in a 1024x frame with rounded edges and shadows:
 
 <table>
 <tr><td>
 
 ```dart
 generateAppIcon(
-  onBuildIcon: () => const AppIcon(
-    size: 512,
+  onBuildIcon: (size) => AppIcon(
+    size: size,
   ),
 );
 ```
@@ -130,13 +130,24 @@ generateAppIcon(
 
 ```dart
 generateAppIconAndroidForeground(
-  onBuildIcon: () => const AppIcon(
-    size: 512,
+  onBuildIcon: (size) => AppIcon(
+    size: size,
     hasTransparentBackground: true,
   ),
 );
 ```
 </td><td><img src="example/assets_dev/app_icons/android_icon_foreground.png" alt="image" width="64" height="auto"></td>
+</tr>
+<td>
+
+```dart
+generateAppIconMacOS(
+    onBuildIcon: (size) => AppIcon(
+      size: size,
+    ),
+  );
+```
+</td><td><img src="example/assets_dev/app_icons/app_icon_macos.png" alt="image" width="64" height="auto"></td>
 </tr>
 </table>
 
