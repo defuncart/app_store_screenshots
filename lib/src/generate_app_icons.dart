@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
@@ -119,9 +118,16 @@ void generateAppIconMacOS({
             ),
           ),
           surfaceSize: surfaceSize,
-          wrapper: (child) => CupertinoApp(
+          // wrapper: (child) => CupertinoApp(
+          //   debugShowCheckedModeBanner: false,
+          //   home: child,
+          // ),
+          wrapper: (child) => MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: child,
+            home: Material(
+              color: Colors.transparent,
+              child: child,
+            ),
           ),
         );
         await screenMatchesGolden(tester, 'app_icons/app_icon_macos');
