@@ -35,12 +35,12 @@ void generateAppIcon({
 }
 
 /// Generates a 512x android app icon foreground saved to `assets_dev/app_icons`
-/// The resulting icon has a transparent background with [padding] around [onBuildIcon]
+/// The resulting icon has a transparent background with optional [padding] around [onBuildIcon]
 /// In general [onBuildIcon] should also return an icon with transparent background
 @isTest
 void generateAppIconAndroidForeground({
   required AppIconBuilder onBuildIcon,
-  EdgeInsets padding = const EdgeInsets.all(80),
+  EdgeInsets? padding,
   bool? skip,
 }) {
   testGoldensWithShadows(
@@ -53,10 +53,12 @@ void generateAppIconAndroidForeground({
         await tester.pumpWidgetBuilder(
           SizedBox.fromSize(
             size: size,
-            child: Padding(
-              padding: padding,
-              child: onBuildIcon(size.shortestSide),
-            ),
+            child: padding != null
+                ? Padding(
+                    padding: padding,
+                    child: onBuildIcon(size.shortestSide),
+                  )
+                : onBuildIcon(size.shortestSide),
           ),
           surfaceSize: size,
           wrapper: (child) => MaterialApp(
