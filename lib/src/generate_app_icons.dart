@@ -120,10 +120,6 @@ void generateAppIconMacOS({
             ),
           ),
           surfaceSize: surfaceSize,
-          // wrapper: (child) => CupertinoApp(
-          //   debugShowCheckedModeBanner: false,
-          //   home: child,
-          // ),
           wrapper: (child) => MaterialApp(
             debugShowCheckedModeBanner: false,
             home: Material(
