@@ -211,6 +211,21 @@ Assets can be found in [example/assets_dev/steam/](example/assets_dev/steam/).
 
 See [example/test/app_store_screenshots/generate_steam_assets_test.dart](example/test/app_store_screenshots/generate_steam_assets_test.dart) for full example.
 
+## Custom Fonts
+
+By default, all fonts included in pubspec.yaml, as well as dependent packages, will be loaded. However, if another font is required, for instance to render an app icon, it can be loaded as follows:
+
+```dart
+setUp(() async {
+  await loadFont(
+    path: 'path/to/font',
+    name: 'FontFamily',
+  );
+});
+```
+
+and then used via `fontFamily` as required.
+
 ## Roadmap
 
 - Add variable device position (i.e 75% visible, bottom not on screen)
