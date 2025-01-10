@@ -176,7 +176,7 @@ Icon, Cover and Background assets for programs in Steam Launcher can be generate
 <tr><td>
 
 ```dart
-generateStreamLogo(
+generateSteamLogo(
   onBuildIcon: (size) => const SteamIcon(),
 );
 ```
@@ -184,7 +184,7 @@ generateStreamLogo(
 <td>
 
 ```dart
-generateStreamCover(
+generateSteamCover(
   onBuildCover: (size) => const SteamCover(),
 );
 ```
@@ -192,7 +192,7 @@ generateStreamCover(
 <td>
 
 ```dart
-generateStreamLogo(
+generateSteamLogo(
   onBuildLogo: (size) => const SteamLogo(),
 );
 ```
@@ -200,7 +200,7 @@ generateStreamLogo(
 <td>
 
 ```dart
-generateStreamBackground(
+generateSteamBackground(
   onBuildBackground: (size) => const SteamBackground(),
 );
 ```

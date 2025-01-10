@@ -6,7 +6,7 @@ import 'models.dart';
 
 /// Generates a 256x icon for a program in steam launcher
 @isTest
-void generateStreamIcon({
+void generateSteamIcon({
   required AssetBuilder onBuildIcon,
   bool? skip,
 }) {
@@ -27,7 +27,7 @@ void generateStreamIcon({
 
 /// Generates a 600x900 cover art for a program in steam launcher
 @isTest
-void generateStreamCover({
+void generateSteamCover({
   required AssetBuilder onBuildCover,
   bool? skip,
 }) {
@@ -48,7 +48,7 @@ void generateStreamCover({
 
 /// Generates a 1290x620 logo art for a program in steam launcher
 @isTest
-void generateStreamLogo({
+void generateSteamLogo({
   required AssetBuilder onBuildLogo,
   bool? skip,
 }) {
@@ -69,7 +69,7 @@ void generateStreamLogo({
 
 /// Generates a 1290x620 background art for a program in steam launcher
 @isTest
-void generateStreamBackground({
+void generateSteamBackground({
   required AssetBuilder onBuildBackground,
   bool? skip,
 }) {

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 void main() {
   final theme = ThemeData.light();
 
-  generateStreamIcon(
+  generateSteamIcon(
     onBuildIcon: (size) => Theme(
       data: theme,
       child: SteamAsset(
@@ -13,7 +13,7 @@ void main() {
     ),
   );
 
-  generateStreamCover(
+  generateSteamCover(
     onBuildCover: (size) => Theme(
       data: theme,
       child: SteamAsset(
@@ -22,7 +22,7 @@ void main() {
     ),
   );
 
-  generateStreamLogo(
+  generateSteamLogo(
     onBuildLogo: (size) => Theme(
       data: theme,
       child: SteamAsset(
@@ -32,7 +32,7 @@ void main() {
     ),
   );
 
-  generateStreamBackground(
+  generateSteamBackground(
     onBuildBackground: (size) => Theme(
       data: theme,
       child: SteamAsset(
