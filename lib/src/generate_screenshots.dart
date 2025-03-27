@@ -38,8 +38,8 @@ void generateAppStoreScreenshots({
                 tester: tester,
                 widget: createScreenshot(
                   background: screen.background ?? config.background,
-                  text: screen.text?.onGenerateText(locale),
-                  textOptions: screen.text?.options ?? config.textOptions,
+                  text: screen.onGenerateText?.call(locale),
+                  foregroundOptions: screen.foregroundOptions ?? config.foregroundOptions,
                   screenContents: createScreenContents(
                     onBuildScreen: screen.onBuildScreen,
                     wrapper: screen.wrapper,

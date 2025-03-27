@@ -45,17 +45,14 @@ dev_dependency:
 final config = ScreenshotsConfig(
   devices: [DeviceType.androidPhonePortrait, DeviceType.iOSPhone67Portrait],
   locales: AppLocalizations.supportedLocales,
-  localizationsDelegates: [
-    GlobalMaterialLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    AppLocalizations.delegate,
-  ],
+  localizationsDelegates: AppLocalizations.localizationsDelegates,
   background: ScreenshotBackground.solid(
     color: Colors.green,
   ),
+  foregroundOptions: const ScreenshotForegroundOptions.top(
+    textStyle: textStyle,
+  ),
   theme: ThemeData.light(),
-  textStyle: TextStyle(color: Colors.white),
 );
 ```
 
@@ -228,6 +225,5 @@ and then used via `fontFamily` as required.
 
 ## Roadmap
 
-- Add variable device position (i.e 75% visible, bottom not on screen)
 - 0.0.1 release on pub.dev
 - Add testing

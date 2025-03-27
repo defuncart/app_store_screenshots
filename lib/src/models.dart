@@ -81,8 +81,8 @@ class ScreenshotsConfig {
   /// Background used for all screenshots (unless overridden)
   final ScreenshotBackground background;
 
-  /// Text options for all screenshots (unless overridden)
-  final ScreenshotTextOptions? textOptions;
+  /// Foreground options for all screenshots (unless overridden)
+  final ScreenshotForegroundOptions? foregroundOptions;
 
   /// Theme used for all screenshots (unless overridden)
   final ThemeData? theme;
@@ -93,7 +93,7 @@ class ScreenshotsConfig {
     required this.locales,
     this.localizationsDelegates,
     required this.background,
-    this.textOptions,
+    this.foregroundOptions,
     this.theme,
   });
 
@@ -106,7 +106,7 @@ class ScreenshotsConfig {
         other.locales == locales &&
         other.localizationsDelegates == localizationsDelegates &&
         other.background == background &&
-        other.textOptions == textOptions &&
+        other.foregroundOptions == foregroundOptions &&
         other.theme == theme;
   }
 
@@ -116,7 +116,7 @@ class ScreenshotsConfig {
         locales.hashCode ^
         localizationsDelegates.hashCode ^
         background.hashCode ^
-        textOptions.hashCode ^
+        foregroundOptions.hashCode ^
         theme.hashCode;
   }
 }
@@ -143,8 +143,11 @@ class ScreenshotScenario {
   /// Optional background, when null default from [ScreenshotsConfig] is used
   final ScreenshotBackground? background;
 
-  /// Text for the screenshot
-  final ScreenshotText? text;
+  /// Optional foreground options, when null default from [ScreenshotsConfig] is used
+  final ScreenshotForegroundOptions? foregroundOptions;
+
+  /// A function to generate the localized label text
+  final LocalizedTextGenerator? onGenerateText;
 
   /// Optional theme, when null default from [ScreenshotsConfig] is used
   final ThemeData? theme;
@@ -160,7 +163,8 @@ class ScreenshotScenario {
     this.onPostPumped,
     this.isFrameVisible = true,
     this.background,
-    this.text,
+    this.foregroundOptions,
+    this.onGenerateText,
     this.theme,
     this.onTearDown,
   });
@@ -176,7 +180,8 @@ class ScreenshotScenario {
         other.onPostPumped == onPostPumped &&
         other.isFrameVisible == isFrameVisible &&
         other.background == background &&
-        other.text == text &&
+        other.foregroundOptions == foregroundOptions &&
+        other.onGenerateText == onGenerateText &&
         other.theme == theme &&
         other.onTearDown == onTearDown;
   }
@@ -189,7 +194,8 @@ class ScreenshotScenario {
         onPostPumped.hashCode ^
         isFrameVisible.hashCode ^
         background.hashCode ^
-        text.hashCode ^
+        foregroundOptions.hashCode ^
+        onGenerateText.hashCode ^
         theme.hashCode ^
         onTearDown.hashCode;
   }
@@ -237,10 +243,20 @@ enum ScreenshotTextPosition {
   bottom,
 }
 
-/// Text options for a screenshot
-class ScreenshotTextOptions {
+const _foregroundDefaultPadding = EdgeInsets.all(48);
+const double _foregroundDefaultSpacer = 16;
+
+/// Foreground options for a screenshot
+class ScreenshotForegroundOptions {
+  final EdgeInsets padding;
+
   /// Text position
   final ScreenshotTextPosition position;
+
+  /// The percentage of device to display on screen
+  ///
+  /// Only applicable for [ScreenshotTextPosition.top], defaults to 1
+  final double? deviceHeightPercentage;
 
   /// Optional text style
   final TextStyle? textStyle;
@@ -251,19 +267,34 @@ class ScreenshotTextOptions {
   /// Optional text alignment
   final TextAlign? textAlign;
 
-  const ScreenshotTextOptions({
-    this.position = ScreenshotTextPosition.top,
+  /// Displays optional text above device whose height can be adjusted (i.e. bottom off screen)
+  const ScreenshotForegroundOptions.top({
+    // TODO: consider adding a check for bottom padding when deviceHeightPercentage < 1
+    this.padding = _foregroundDefaultPadding,
+    double? deviceHeightPercentage,
     this.textStyle,
-    this.spacer = 16,
+    this.spacer = _foregroundDefaultSpacer,
     this.textAlign,
-  });
+  })  : position = ScreenshotTextPosition.top,
+        deviceHeightPercentage = deviceHeightPercentage ?? 1;
+
+  /// Displays optional text below device
+  const ScreenshotForegroundOptions.bottom({
+    this.padding = _foregroundDefaultPadding,
+    this.textStyle,
+    this.spacer = _foregroundDefaultSpacer,
+    this.textAlign,
+  })  : position = ScreenshotTextPosition.bottom,
+        deviceHeightPercentage = null;
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is ScreenshotTextOptions &&
+    return other is ScreenshotForegroundOptions &&
+        other.padding == padding &&
         other.position == position &&
+        other.deviceHeightPercentage == deviceHeightPercentage &&
         other.textStyle == textStyle &&
         other.spacer == spacer &&
         other.textAlign == textAlign;
@@ -271,35 +302,16 @@ class ScreenshotTextOptions {
 
   @override
   int get hashCode {
-    return position.hashCode ^ textStyle.hashCode ^ spacer.hashCode ^ textAlign.hashCode;
+    return padding.hashCode ^
+        position.hashCode ^
+        deviceHeightPercentage.hashCode ^
+        textStyle.hashCode ^
+        spacer.hashCode ^
+        textAlign.hashCode;
   }
 }
 
 typedef LocalizedTextGenerator = String Function(Locale);
-
-/// Text for a specific screenshot
-class ScreenshotText {
-  /// A function to generate the localized label text
-  final LocalizedTextGenerator onGenerateText;
-
-  /// Text options, when null default from [ScreenshotConfig] is used
-  final ScreenshotTextOptions? options;
-
-  const ScreenshotText({
-    required this.onGenerateText,
-    this.options,
-  });
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is ScreenshotText && other.onGenerateText == onGenerateText && other.options == options;
-  }
-
-  @override
-  int get hashCode => onGenerateText.hashCode ^ options.hashCode;
-}
 
 class ScreenshotUnsupportedLocale extends ArgumentError {
   ScreenshotUnsupportedLocale(Locale locale) : super.value(locale, '', 'Unsupported Locale');

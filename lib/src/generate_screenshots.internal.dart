@@ -31,14 +31,14 @@ Widget createScreenContents({
 Widget createScreenshot({
   required ScreenshotBackground background,
   String? text,
-  ScreenshotTextOptions? textOptions,
+  ScreenshotForegroundOptions? foregroundOptions,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
   required bool isFrameVisible,
   required Orientation orientation,
   required double height,
 }) {
-  final effectiveTextOptions = textOptions ?? const ScreenshotTextOptions();
+  final effectiveForegroundOptions = foregroundOptions ?? const ScreenshotForegroundOptions.top();
 
   return SizedBox(
     height: height,
@@ -50,37 +50,61 @@ Widget createScreenshot({
           child: background.widget,
         ),
         // Content
-        Padding(
-          padding: const EdgeInsets.all(48),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              if (text != null && effectiveTextOptions.position.isTop) ...[
-                Text(
-                  text,
-                  textAlign: effectiveTextOptions.textAlign,
-                  style: effectiveTextOptions.textStyle,
+        SizedBox(
+          height: height,
+          child: Padding(
+            padding: effectiveForegroundOptions.padding,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                if (text != null && effectiveForegroundOptions.position.isTop) ...[
+                  Text(
+                    text,
+                    textAlign: effectiveForegroundOptions.textAlign,
+                    style: effectiveForegroundOptions.textStyle,
+                  ),
+                  SizedBox(height: effectiveForegroundOptions.spacer),
+                ],
+                Expanded(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return SizedBox(
+                        height: constraints.maxHeight,
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Positioned(
+                              // when 0 < deviceHeightPercentage < 1, position frame accordingly
+                              bottom: effectiveForegroundOptions.deviceHeightPercentage != null &&
+                                      effectiveForegroundOptions.deviceHeightPercentage! > 0 &&
+                                      effectiveForegroundOptions.deviceHeightPercentage! < 1
+                                  ? -constraints.maxHeight *
+                                      (1 - (effectiveForegroundOptions.deviceHeightPercentage ?? 0))
+                                  : null,
+                              child: DeviceFrame(
+                                device: deviceFrame,
+                                isFrameVisible: isFrameVisible,
+                                orientation: orientation,
+                                screen: screenContents,
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
                 ),
-                SizedBox(height: effectiveTextOptions.spacer),
+                if (text != null && effectiveForegroundOptions.position.isBottom) ...[
+                  SizedBox(height: effectiveForegroundOptions.spacer),
+                  Text(
+                    text,
+                    textAlign: effectiveForegroundOptions.textAlign,
+                    style: effectiveForegroundOptions.textStyle,
+                  ),
+                ],
               ],
-              Expanded(
-                child: DeviceFrame(
-                  device: deviceFrame,
-                  isFrameVisible: isFrameVisible,
-                  orientation: orientation,
-                  screen: screenContents,
-                ),
-              ),
-              if (text != null && effectiveTextOptions.position.isBottom) ...[
-                SizedBox(height: effectiveTextOptions.spacer),
-                Text(
-                  text,
-                  textAlign: effectiveTextOptions.textAlign,
-                  style: effectiveTextOptions.textStyle,
-                ),
-              ],
-            ],
+            ),
           ),
         ),
       ],

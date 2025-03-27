@@ -6,7 +6,6 @@ import 'package:example/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -20,39 +19,35 @@ void main() {
     config: ScreenshotsConfig(
       devices: DeviceType.values,
       locales: AppLocalizations.supportedLocales,
-      localizationsDelegates: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        AppLocalizations.delegate,
-      ],
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
       background: ScreenshotBackground.solid(
         color: Colors.green,
       ),
-      theme: lightTheme,
-      textOptions: const ScreenshotTextOptions(
+      foregroundOptions: const ScreenshotForegroundOptions.top(
         textStyle: textStyle,
       ),
+      theme: lightTheme,
     ),
     screens: [
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
-        text: ScreenshotText(
-          onGenerateText: (locale) => switch (locale) {
-            const Locale('en') => 'Light mode',
-            const Locale('de') => 'Hellmodus',
-            _ => throw ScreenshotUnsupportedLocale(locale),
-          },
-        ),
+        onGenerateText: (locale) => switch (locale) {
+          const Locale('en') => 'Light mode',
+          const Locale('de') => 'Hellmodus',
+          _ => throw ScreenshotUnsupportedLocale(locale),
+        },
       ),
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
-        text: ScreenshotText(
-          onGenerateText: (locale) => switch (locale) {
-            const Locale('en') => 'Dark mode',
-            const Locale('de') => 'Dunkelmodus',
-            _ => throw ScreenshotUnsupportedLocale(locale),
-          },
+        onGenerateText: (locale) => switch (locale) {
+          const Locale('en') => 'Dark mode',
+          const Locale('de') => 'Dunkelmodus',
+          _ => throw ScreenshotUnsupportedLocale(locale),
+        },
+        foregroundOptions: const ScreenshotForegroundOptions.top(
+          padding: EdgeInsets.only(top: 64, left: 64, right: 64),
+          textStyle: textStyle,
+          deviceHeightPercentage: 0.75,
         ),
         theme: darkTheme,
       ),
@@ -69,13 +64,11 @@ void main() {
           ],
           child: child,
         ),
-        text: ScreenshotText(
-          onGenerateText: (locale) => switch (locale) {
-            const Locale('en') => 'Riverpod',
-            const Locale('de') => 'Riverpod',
-            _ => throw ScreenshotUnsupportedLocale(locale),
-          },
-        ),
+        onGenerateText: (locale) => switch (locale) {
+          const Locale('en') => 'Riverpod',
+          const Locale('de') => 'Riverpod',
+          _ => throw ScreenshotUnsupportedLocale(locale),
+        },
         background: ScreenshotBackground.gradient(
           gradient: const LinearGradient(
             begin: Alignment.bottomRight,
@@ -94,13 +87,11 @@ void main() {
           child: child,
         ),
         onPostPumped: (tester) async => await tester.tap(find.byType(FloatingActionButton).first),
-        text: ScreenshotText(
-          onGenerateText: (locale) => switch (locale) {
-            const Locale('en') => 'bloc',
-            const Locale('de') => 'bloc',
-            _ => throw ScreenshotUnsupportedLocale(locale),
-          },
-        ),
+        onGenerateText: (locale) => switch (locale) {
+          const Locale('en') => 'bloc',
+          const Locale('de') => 'bloc',
+          _ => throw ScreenshotUnsupportedLocale(locale),
+        },
         background: ScreenshotBackground.widget(
           widget: const TriangleBackground(
             color1: Colors.green,
