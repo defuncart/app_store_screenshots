@@ -28,6 +28,7 @@ void main() {
       ),
       theme: lightTheme,
     ),
+    outputDir: 'docs',
     screens: [
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
