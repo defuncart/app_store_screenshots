@@ -14,12 +14,15 @@ import 'models.internal.dart';
 /// [onSetUp] is called before each screen is generated
 ///
 /// [onTearDown] is called after each screen has been generated
+///
+/// [outputDir] is an optional directory to save screenshots, defaults to [defaultOutputDir]
 @isTest
 void generateAppStoreScreenshots({
   FutureOr<void> Function()? onSetUp,
   required ScreenshotsConfig config,
   required List<ScreenshotScenario> screens,
   FutureOr<void> Function()? onTearDown,
+  String outputDir = defaultOutputDir,
   bool? skip,
 }) {
   for (final screen in screens) {
@@ -64,7 +67,7 @@ void generateAppStoreScreenshots({
 
               // once all goldens are generated, move to target folder
               if (screen == screens.last && device == config.devices.last && locale == config.locales.last) {
-                moveGoldens('screenshots');
+                moveGoldens('screenshots', to: outputDir);
               }
             },
             skip: skip,

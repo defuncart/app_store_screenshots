@@ -5,11 +5,14 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 
-/// Moves goldens from `test_dir/goldens/[dirName]` to `assets_dev/[dirName]`
-/// When [replaceAllFiles] is true, assets_dev/[dirName] is firstly deleted
+const defaultOutputDir = 'assets_dev';
+
+/// Moves goldens from `test_dir/goldens/[dirName]` to `[to]/[dirName]`
+/// When [replaceAllFiles] is true, `[to]/[dirName]` is firstly deleted
 /// When [replaceAllFiles] is false, files are copied one-by-one
 void moveGoldens(
   String dirName, {
+  String to = defaultOutputDir,
   bool replaceAllFiles = true,
 }) {
   // determine path of current test
@@ -21,7 +24,7 @@ void moveGoldens(
 
   final goldenPath = p.join(testFolderPath, 'goldens');
   final sourcePath = p.join(goldenPath, dirName);
-  final targetPath = p.join('assets_dev', dirName);
+  final targetPath = p.join(to, dirName);
 
   // create output folder if necessary
   if (!Directory(targetPath).existsSync()) {
