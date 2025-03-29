@@ -14,12 +14,12 @@ jobs:
           channel: ${{ steps.fvm-config-action.outputs.FLUTTER_CHANNEL }}
       - name: Install packages
         run: |
-          dart pub get
+          flutter pub get
           cd example
           flutter pub get
       - name: Lint
-        run: dart analyze
+        run: flutter analyze
       - name: Formatting
         run: dart format . -l 120 --set-exit-if-changed
       - name: Unit tests
-        run: dart test
+        run: flutter test

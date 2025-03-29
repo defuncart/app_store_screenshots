@@ -100,3 +100,27 @@ extension ScreenshotTextPositionExtensions on ScreenshotTextPosition {
 
   bool get isBottom => this == ScreenshotTextPosition.bottom;
 }
+
+extension ScreenshotForegroundOptionsExtension on ScreenshotForegroundOptions? {
+  /// Merges [this] with [other]
+  ///
+  /// If both are null, default values are returned
+  ScreenshotForegroundOptions merge(ScreenshotForegroundOptions? other) {
+    if (this == null && other == null) {
+      return const ScreenshotForegroundOptions.top();
+    } else if (this == null) {
+      return other!;
+    } else if (other == null) {
+      return this!;
+    }
+
+    return other.copyWith(
+      padding: this!.padding,
+      position: this!.position,
+      deviceHeightPercentage: this!.deviceHeightPercentage,
+      textStyle: this!.textStyle,
+      spacer: this!.spacer,
+      textAlign: this!.textAlign,
+    );
+  }
+}

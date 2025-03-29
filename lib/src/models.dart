@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'models.internal.dart';
+
 /// All supported device types
 enum DeviceType {
   /// Android phone 1920x1080 Orientation: Portrait
@@ -267,6 +269,15 @@ class ScreenshotForegroundOptions {
   /// Optional text alignment
   final TextAlign? textAlign;
 
+  const ScreenshotForegroundOptions._({
+    this.padding = _foregroundDefaultPadding,
+    required this.position,
+    this.deviceHeightPercentage,
+    this.textStyle,
+    this.spacer = _foregroundDefaultSpacer,
+    this.textAlign,
+  });
+
   /// Displays optional text above device whose height can be adjusted (i.e. bottom off screen)
   const ScreenshotForegroundOptions.top({
     // TODO: consider adding a check for bottom padding when deviceHeightPercentage < 1
@@ -309,6 +320,24 @@ class ScreenshotForegroundOptions {
         spacer.hashCode ^
         textAlign.hashCode;
   }
+
+  ScreenshotForegroundOptions copyWith({
+    EdgeInsets? padding,
+    ScreenshotTextPosition? position,
+    double? deviceHeightPercentage,
+    TextStyle? textStyle,
+    double? spacer,
+    TextAlign? textAlign,
+  }) =>
+      ScreenshotForegroundOptions._(
+        padding: padding ?? this.padding,
+        position: position ?? this.position,
+        deviceHeightPercentage:
+            (position ?? this.position).isBottom ? null : deviceHeightPercentage ?? this.deviceHeightPercentage,
+        textStyle: textStyle ?? this.textStyle,
+        spacer: spacer ?? this.spacer,
+        textAlign: textAlign ?? this.textAlign,
+      );
 }
 
 typedef LocalizedTextGenerator = String Function(Locale);

@@ -39,7 +39,7 @@ void generateAppStoreScreenshots({
                 widget: createScreenshot(
                   background: screen.background ?? config.background,
                   text: screen.onGenerateText?.call(locale),
-                  foregroundOptions: screen.foregroundOptions ?? config.foregroundOptions,
+                  foregroundOptions: screen.foregroundOptions.merge(config.foregroundOptions),
                   screenContents: createScreenContents(
                     onBuildScreen: screen.onBuildScreen,
                     wrapper: screen.wrapper,

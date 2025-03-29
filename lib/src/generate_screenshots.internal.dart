@@ -31,15 +31,13 @@ Widget createScreenContents({
 Widget createScreenshot({
   required ScreenshotBackground background,
   String? text,
-  ScreenshotForegroundOptions? foregroundOptions,
+  required ScreenshotForegroundOptions foregroundOptions,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
   required bool isFrameVisible,
   required Orientation orientation,
   required double height,
 }) {
-  final effectiveForegroundOptions = foregroundOptions ?? const ScreenshotForegroundOptions.top();
-
   return SizedBox(
     height: height,
     child: Stack(
@@ -53,18 +51,18 @@ Widget createScreenshot({
         SizedBox(
           height: height,
           child: Padding(
-            padding: effectiveForegroundOptions.padding,
+            padding: foregroundOptions.padding,
             child: Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                if (text != null && effectiveForegroundOptions.position.isTop) ...[
+                if (text != null && foregroundOptions.position.isTop) ...[
                   Text(
                     text,
-                    textAlign: effectiveForegroundOptions.textAlign,
-                    style: effectiveForegroundOptions.textStyle,
+                    textAlign: foregroundOptions.textAlign,
+                    style: foregroundOptions.textStyle,
                   ),
-                  SizedBox(height: effectiveForegroundOptions.spacer),
+                  SizedBox(height: foregroundOptions.spacer),
                 ],
                 Expanded(
                   child: LayoutBuilder(
@@ -76,11 +74,10 @@ Widget createScreenshot({
                           children: [
                             Positioned(
                               // when 0 < deviceHeightPercentage < 1, position frame accordingly
-                              bottom: effectiveForegroundOptions.deviceHeightPercentage != null &&
-                                      effectiveForegroundOptions.deviceHeightPercentage! > 0 &&
-                                      effectiveForegroundOptions.deviceHeightPercentage! < 1
-                                  ? -constraints.maxHeight *
-                                      (1 - (effectiveForegroundOptions.deviceHeightPercentage ?? 0))
+                              bottom: foregroundOptions.deviceHeightPercentage != null &&
+                                      foregroundOptions.deviceHeightPercentage! > 0 &&
+                                      foregroundOptions.deviceHeightPercentage! < 1
+                                  ? -constraints.maxHeight * (1 - (foregroundOptions.deviceHeightPercentage ?? 0))
                                   : null,
                               child: DeviceFrame(
                                 device: deviceFrame,
@@ -95,12 +92,12 @@ Widget createScreenshot({
                     },
                   ),
                 ),
-                if (text != null && effectiveForegroundOptions.position.isBottom) ...[
-                  SizedBox(height: effectiveForegroundOptions.spacer),
+                if (text != null && foregroundOptions.position.isBottom) ...[
+                  SizedBox(height: foregroundOptions.spacer),
                   Text(
                     text,
-                    textAlign: effectiveForegroundOptions.textAlign,
-                    style: effectiveForegroundOptions.textStyle,
+                    textAlign: foregroundOptions.textAlign,
+                    style: foregroundOptions.textStyle,
                   ),
                 ],
               ],
