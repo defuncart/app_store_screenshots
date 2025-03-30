@@ -149,6 +149,8 @@ class ScreenshotScenario {
   final ScreenshotForegroundOptions? foregroundOptions;
 
   /// A function to generate the localized label text
+  ///
+  /// Either text as String or Widget is expected
   final LocalizedTextGenerator? onGenerateText;
 
   /// Optional theme, when null default from [ScreenshotsConfig] is used
@@ -340,7 +342,7 @@ class ScreenshotForegroundOptions {
       );
 }
 
-typedef LocalizedTextGenerator = String Function(Locale);
+typedef LocalizedTextGenerator = dynamic Function(Locale);
 
 class ScreenshotUnsupportedLocale extends ArgumentError {
   ScreenshotUnsupportedLocale(Locale locale) : super.value(locale, '', 'Unsupported Locale');
