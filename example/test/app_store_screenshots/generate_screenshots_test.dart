@@ -17,7 +17,7 @@ void main() {
 
   generateAppStoreScreenshots(
     config: ScreenshotsConfig(
-      devices: DeviceType.values,
+      devices: DeviceTypes.mobile,
       locales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       background: ScreenshotBackground.solid(

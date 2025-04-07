@@ -71,11 +71,22 @@ enum DeviceType {
   windows,
 }
 
+/// Convenience sets of different device types
+sealed class DeviceTypes {
+  DeviceTypes._();
+
+  /// Mobile portrait (Android & iOS)
+  static const List<DeviceType> mobile = [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait];
+
+  /// Tablet landscape (Android & iOS)
+  static const List<DeviceType> tablet = [DeviceType.androidTablet10Landscape, DeviceType.iOSTablet13Landscape];
+}
+
 /// A base configuration used for all screenshots
 class ScreenshotsConfig {
   /// Supported device types
   ///
-  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait]
+  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait] or [DeviceTypes]
   ///
   /// See [DeviceType] for more info
   final Iterable<DeviceType> devices;

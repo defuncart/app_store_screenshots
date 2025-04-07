@@ -43,7 +43,7 @@ dev_dependency:
 
 ```dart
 final config = ScreenshotsConfig(
-  devices: [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait],
+  devices: DeviceTypes.mobile,
   locales: AppLocalizations.supportedLocales,
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   background: ScreenshotBackground.solid(
