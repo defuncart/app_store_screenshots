@@ -43,17 +43,23 @@ enum DeviceType {
   /// iPhone 6.5" Orientation: Landscape
   iOSPhone65Landscape,
 
-  /// iPhone 6.7" Orientation: Portrait
-  iOSPhone67Portrait,
+  /// iPhone 6.9" Orientation: Portrait
+  iOSPhone69Portrait,
 
-  /// iPhone 6.7" Orientation: Landscape
-  iOSPhone67Landscape,
+  /// iPhone 6.9" Orientation: Landscape
+  iOSPhone69Landscape,
 
   /// iPad 12.9" Orientation: Portrait
   iOSTablet129Portrait,
 
   /// iPad 12.9" Orientation: Landscape
   iOSTablet129Landscape,
+
+  /// iPad 13" Orientation: Portrait
+  iOSTablet13Portrait,
+
+  /// iPad 13" Orientation: Landscape
+  iOSTablet13Landscape,
 
   /// Laptop running Linux
   linux,
@@ -69,7 +75,7 @@ enum DeviceType {
 class ScreenshotsConfig {
   /// Supported device types
   ///
-  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone67Portrait, DeviceType.iOSPhone55Portrait]
+  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait]
   ///
   /// See [DeviceType] for more info
   final Iterable<DeviceType> devices;

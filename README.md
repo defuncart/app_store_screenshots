@@ -43,7 +43,7 @@ dev_dependency:
 
 ```dart
 final config = ScreenshotsConfig(
-  devices: [DeviceType.androidPhonePortrait, DeviceType.iOSPhone67Portrait],
+  devices: [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait],
   locales: AppLocalizations.supportedLocales,
   localizationsDelegates: AppLocalizations.localizationsDelegates,
   background: ScreenshotBackground.solid(
@@ -98,10 +98,12 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 | iOSPhone55Landscape      | 5.5" iPhone        | 2208x1242  | iPhone 13 mini¹ |
 | iOSPhone65Portrait       | 6.5" iPhone        | 1242x2688  | iPhone 13 mini  |
 | iOSPhone65Landscape      | 6.5" iPhone        | 2688x1242  | iPhone 13 mini  |
-| iOSPhone67Portrait       | 6.7" iPhone        | 1290x2796  | iPhone 13 mini¹ |
-| iOSPhone67Landscape      | 6.7" iPhone        | 2796x1290  | iPhone 13 mini¹ |
+| iOSPhone69Portrait       | 6.9" iPhone        | 1320x2868  | iPhone 13 mini¹ |
+| iOSPhone69Landscape      | 6.9" iPhone        | 2868x1320  | iPhone 13 mini¹ |
 | iOSTablet129Portrait     | 12.9" iPad         | 2048x2732  | iPad 4th Gen    |
 | iOSTablet129Landscape    | 12.9" iPad         | 2732x2048  | iPad 4th Gen    |
+| iOSTablet13Portrait      | 13" iPad           | 2064x2752  | iPad 4th Gen¹   |
+| iOSTablet13Landscape     | 13" iPad           | 2752x2064  | iPad 4th Gen¹   |
 | linux                    |                    | 1920x1080  | Laptop          |
 | macOS                    |                    | 1920x1080  | Laptop          |
 | windows                  |                    | 1920x1080  | Laptop          |
