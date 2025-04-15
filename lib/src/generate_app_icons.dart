@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:meta/meta.dart';
@@ -5,16 +7,19 @@ import 'package:meta/meta.dart';
 import 'common.dart';
 import 'models.dart';
 
-/// Generates a 512x app icon saved to `assets_dev/app_icons`
+/// Generates a 512x app icon saved to [filepath] (default: `assets_dev/app_icons`)
 @isTest
 void generateAppIcon({
   required AppIconBuilder onBuildIcon,
+  String? filepath,
   bool? skip,
 }) {
   testGoldensWithShadows(
     () => testGoldens(
       'Generate app icon',
       (tester) async {
+        final effectiveFilepath = filepath ?? 'app_icons/app_icon';
+
         await loadAppFonts();
 
         const size = Size(512, 512);
@@ -25,9 +30,9 @@ void generateAppIcon({
           ),
           surfaceSize: size,
         );
-        await screenMatchesGolden(tester, 'app_icons/app_icon');
+        await screenMatchesGolden(tester, effectiveFilepath);
 
-        moveGoldens('app_icons', replaceAllFiles: false);
+        moveGoldens(Directory(effectiveFilepath).parent.path, replaceAllFiles: false);
       },
       skip: skip,
     ),
@@ -41,12 +46,15 @@ void generateAppIcon({
 void generateAppIconAndroidForeground({
   required AppIconBuilder onBuildIcon,
   EdgeInsets? padding,
+  String? filepath,
   bool? skip,
 }) {
   testGoldensWithShadows(
     () => testGoldens(
       'Generate android icon foreground',
       (tester) async {
+        final effectiveFilepath = filepath ?? 'app_icons/android_icon_foreground';
+
         await loadAppFonts();
 
         const size = Size(512, 512);
@@ -69,9 +77,9 @@ void generateAppIconAndroidForeground({
             ),
           ),
         );
-        await screenMatchesGolden(tester, 'app_icons/android_icon_foreground');
+        await screenMatchesGolden(tester, effectiveFilepath);
 
-        moveGoldens('app_icons', replaceAllFiles: false);
+        moveGoldens(Directory(effectiveFilepath).parent.path, replaceAllFiles: false);
       },
       skip: skip,
     ),
@@ -82,12 +90,15 @@ void generateAppIconAndroidForeground({
 @isTest
 void generateAppIconMacOS({
   required AppIconBuilder onBuildIcon,
+  String? filepath,
   bool? skip,
 }) {
   testGoldensWithShadows(
     () => testGoldens(
       'Generate macOS icon',
       (tester) async {
+        final effectiveFilepath = filepath ?? 'app_icons/app_icon_macos';
+
         await loadAppFonts();
 
         const surfaceSize = Size(1024, 1024);
@@ -128,9 +139,9 @@ void generateAppIconMacOS({
             ),
           ),
         );
-        await screenMatchesGolden(tester, 'app_icons/app_icon_macos');
+        await screenMatchesGolden(tester, effectiveFilepath);
 
-        moveGoldens('app_icons', replaceAllFiles: false);
+        moveGoldens(Directory(effectiveFilepath).parent.path, replaceAllFiles: false);
       },
       skip: skip,
     ),
