@@ -6,6 +6,7 @@ void main() {
     onBuildIcon: (size) => AppIcon(
       size: size,
     ),
+    filepath: 'app_icons/test',
   );
 
   generateAppIconAndroidForeground(
@@ -13,12 +14,14 @@ void main() {
       size: size,
       hasTransparentBackground: true,
     ),
+    filepath: 'app_icons/test2',
   );
 
   generateAppIconMacOS(
     onBuildIcon: (size) => AppIcon(
       size: size,
     ),
+    filepath: 'app_icons/test3',
   );
 }
 
