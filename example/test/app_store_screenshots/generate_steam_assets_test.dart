@@ -1,43 +1,36 @@
 import 'package:app_store_screenshots/app_store_screenshots.dart';
+import 'package:example/themes/theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  final theme = ThemeData.light();
-
   generateSteamIcon(
-    onBuildIcon: (size) => Theme(
-      data: theme,
-      child: SteamAsset(
-        size: size,
-      ),
+    onBuildIcon: (size) => SteamAsset(
+      size: size,
     ),
   );
 
   generateSteamCover(
-    onBuildCover: (size) => Theme(
-      data: theme,
-      child: SteamAsset(
-        size: size,
-      ),
+    onBuildCover: (size) => SteamAsset(
+      size: size,
     ),
   );
 
   generateSteamLogo(
-    onBuildLogo: (size) => Theme(
-      data: theme,
-      child: SteamAsset(
-        size: size,
-        isTransparent: true,
-      ),
+    onBuildLogo: (size) => SteamAsset(
+      size: size,
+      isTransparent: true,
     ),
   );
 
-  generateSteamBackground(
-    onBuildBackground: (size) => Theme(
-      data: theme,
-      child: SteamAsset(
-        size: size,
-      ),
+  generateSteamHero(
+    onBuildHero: (size) => SteamAsset(
+      size: size,
+    ),
+  );
+
+  generateSteamBanner(
+    onBuildBanner: (size) => SteamAsset(
+      size: size,
     ),
   );
 }
@@ -54,15 +47,18 @@ class SteamAsset extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: size.width,
-      height: size.height,
-      color: isTransparent ? Colors.transparent : Theme.of(context).scaffoldBackgroundColor,
-      child: Center(
-        child: Icon(
-          Icons.flutter_dash,
-          color: Theme.of(context).iconTheme.color,
-          size: size.shortestSide * 0.6,
+    return Theme(
+      data: lightTheme,
+      child: Container(
+        width: size.width,
+        height: size.height,
+        color: isTransparent ? Colors.transparent : Theme.of(context).scaffoldBackgroundColor,
+        child: Center(
+          child: Icon(
+            Icons.flutter_dash,
+            color: Theme.of(context).iconTheme.color,
+            size: size.shortestSide * 0.6,
+          ),
         ),
       ),
     );
