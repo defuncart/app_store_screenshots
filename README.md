@@ -167,7 +167,7 @@ See [example/test/app_store_screenshots/generate_google_play_assets_test.dart](e
 
 ### Steam Assets
 
-Icon, Cover and Background assets for programs in Steam Launcher can be generated as follows:
+Icon, Cover, Hero/Logo and Banner assets for programs in Steam Launcher can be generated as follows:
 
 <table>
 <tr><td>
@@ -197,11 +197,19 @@ generateSteamLogo(
 <td>
 
 ```dart
-generateSteamBackground(
-  onBuildBackground: (size) => const SteamBackground(),
+generateSteamHero(
+  onBuildHero: (size) => const SteamHero(),
 );
 ```
-</td><td><img src="example/assets_dev/steam/background.png" alt="image" width="64" height="auto"></td></tr>
+</td><td><img src="example/assets_dev/steam/hero.png" alt="image" width="64" height="auto"></td></tr>
+<td>
+
+```dart
+generateSteamBanner(
+  onBuildBanner: (size) => const SteamBanner(),
+);
+```
+</td><td><img src="example/assets_dev/steam/banner.png" alt="image" width="64" height="auto"></td></tr>
 </table>
 
 Assets can be found in [example/assets_dev/steam/](example/assets_dev/steam/).

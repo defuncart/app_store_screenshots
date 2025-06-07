@@ -15,7 +15,7 @@ void generateSteamIcon({
   const outputDirectory = 'steam';
 
   generateCustomAsset(
-    'Generate Steam cover',
+    'Generate Steam icon',
     size: size,
     content: onBuildIcon(size),
     filename: filename,
@@ -46,7 +46,7 @@ void generateSteamCover({
   );
 }
 
-/// Generates a 1290x620 logo art for a program in steam launcher
+/// Generates a 650x248 logo art for a program in steam launcher
 @isTest
 void generateSteamLogo({
   required AssetBuilder onBuildLogo,
@@ -67,20 +67,41 @@ void generateSteamLogo({
   );
 }
 
-/// Generates a 1290x620 background art for a program in steam launcher
+/// Generates a 1290x620 hero background art for a program in steam launcher
 @isTest
-void generateSteamBackground({
-  required AssetBuilder onBuildBackground,
+void generateSteamHero({
+  required AssetBuilder onBuildHero,
   bool? skip,
 }) {
   const size = Size(1290, 620);
-  const filename = 'steam/background';
+  const filename = 'steam/hero';
   const outputDirectory = 'steam';
 
   generateCustomAsset(
-    'Generate Steam background',
+    'Generate Steam hero',
     size: size,
-    content: onBuildBackground(size),
+    content: onBuildHero(size),
+    filename: filename,
+    outputDirectory: outputDirectory,
+    replaceAllFiles: false,
+    skip: skip,
+  );
+}
+
+/// Generates a 920x430 banner for last opened program in steam launcher
+@isTest
+void generateSteamBanner({
+  required AssetBuilder onBuildBanner,
+  bool? skip,
+}) {
+  const size = Size(920, 430);
+  const filename = 'steam/banner';
+  const outputDirectory = 'steam';
+
+  generateCustomAsset(
+    'Generate Steam banner',
+    size: size,
+    content: onBuildBanner(size),
     filename: filename,
     outputDirectory: outputDirectory,
     replaceAllFiles: false,
