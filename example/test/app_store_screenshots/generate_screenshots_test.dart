@@ -40,7 +40,35 @@ void main() {
       ScreenshotScenario(
         onBuildScreen: () => const Page1(),
         onGenerateText: (locale) => switch (locale) {
-          const Locale('en') => 'Dark mode',
+          const Locale('en') => Column(
+              children: [
+                ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (bounds) => const LinearGradient(
+                    colors: [
+                      Colors.white,
+                      Colors.green,
+                    ],
+                    stops: [0.4, 1],
+                  ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                  child: const Text('Dark mode', style: textStyle),
+                ),
+                Text.rich(
+                  TextSpan(
+                    children: const [
+                      TextSpan(
+                        text: 'Reduce glare & blue light\n',
+                      ),
+                      TextSpan(
+                        text: 'Reduce energy consumption',
+                      ),
+                    ],
+                    style: textStyle.copyWith(fontSize: textStyle.fontSize! * 0.6),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           const Locale('de') => 'Dunkelmodus',
           _ => throw ScreenshotUnsupportedLocale(locale),
         },
@@ -96,6 +124,11 @@ void main() {
           widget: const TriangleBackground(
             color1: Colors.green,
             color2: Colors.white,
+          ),
+        ),
+        foregroundOptions: ScreenshotForegroundOptions.bottom(
+          textStyle: textStyle.copyWith(
+            color: Colors.green,
           ),
         ),
       ),
