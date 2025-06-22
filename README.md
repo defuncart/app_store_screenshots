@@ -84,29 +84,29 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 
 #### Supported Devices
 
-| DeviceType               | Description        | Resolution | Frame           |
-| ------------------------ | ------------------ | ---------- | --------------- |
-| androidPhonePortrait     | Android Phone      | 1080x1920  | One Plus 8 Pro  |
-| androidPhoneLandscape    | Android Phone      | 1920x1080  | One Plus 8 Pro  |
-| androidTablet7Portrait   | Android 7" Tablet  | 1080x1920  | Generic         |
-| androidTablet7Landscape  | Android 7" Tablet  | 1920x1080  | Generic         |
-| androidTablet10Portrait  | Android 10" Tablet | 1080x1920  | Generic         |
-| androidTablet10Landscape | Android 10" Tablet | 1920x1080  | Generic         |
-| iOSPhone47Portrait       | 4.7" iPhone        | 750x1334   | iPhone SE       |
-| iOSPhone47Landscape      | 4.7" iPhone        | 750x1334   | iPhone SE       |
-| iOSPhone55Portrait       | 5.5" iPhone        | 1242x2208  | iPhone 13 mini¹ |
-| iOSPhone55Landscape      | 5.5" iPhone        | 2208x1242  | iPhone 13 mini¹ |
-| iOSPhone65Portrait       | 6.5" iPhone        | 1242x2688  | iPhone 13 mini  |
-| iOSPhone65Landscape      | 6.5" iPhone        | 2688x1242  | iPhone 13 mini  |
-| iOSPhone69Portrait       | 6.9" iPhone        | 1320x2868  | iPhone 13 mini¹ |
-| iOSPhone69Landscape      | 6.9" iPhone        | 2868x1320  | iPhone 13 mini¹ |
-| iOSTablet129Portrait     | 12.9" iPad         | 2048x2732  | iPad 4th Gen    |
-| iOSTablet129Landscape    | 12.9" iPad         | 2732x2048  | iPad 4th Gen    |
-| iOSTablet13Portrait      | 13" iPad           | 2064x2752  | iPad 4th Gen¹   |
-| iOSTablet13Landscape     | 13" iPad           | 2752x2064  | iPad 4th Gen¹   |
-| linux                    |                    | 1920x1080  | Laptop          |
-| macOS                    |                    | 1920x1080  | Laptop          |
-| windows                  |                    | 1920x1080  | Laptop          |
+| DeviceType               | Description        | Resolution | Frame             |
+| ------------------------ | ------------------ | ---------- | ----------------- |
+| androidPhonePortrait     | Android Phone      | 1080x1920  | Pixel 9           |
+| androidPhoneLandscape    | Android Phone      | 1920x1080  | Pixel 9           |
+| androidTablet7Portrait   | Android 7" Tablet  | 1080x1920  | Generic           |
+| androidTablet7Landscape  | Android 7" Tablet  | 1920x1080  | Generic           |
+| androidTablet10Portrait  | Android 10" Tablet | 1080x1920  | Generic           |
+| androidTablet10Landscape | Android 10" Tablet | 1920x1080  | Generic           |
+| iOSPhone47Portrait       | 4.7" iPhone        | 750x1334   | iPhone SE         |
+| iOSPhone47Landscape      | 4.7" iPhone        | 750x1334   | iPhone SE         |
+| iOSPhone55Portrait       | 5.5" iPhone        | 1242x2208  | iPhone 13 mini¹   |
+| iOSPhone55Landscape      | 5.5" iPhone        | 2208x1242  | iPhone 13 mini¹   |
+| iOSPhone65Portrait       | 6.5" iPhone        | 1242x2688  | iPhone 13 mini    |
+| iOSPhone65Landscape      | 6.5" iPhone        | 2688x1242  | iPhone 13 mini    |
+| iOSPhone69Portrait       | 6.9" iPhone        | 1320x2868  | iPhone 16 Pro Max |
+| iOSPhone69Landscape      | 6.9" iPhone        | 2868x1320  | iPhone 16 Pro Max |
+| iOSTablet129Portrait     | 12.9" iPad         | 2048x2732  | iPad 4th Gen      |
+| iOSTablet129Landscape    | 12.9" iPad         | 2732x2048  | iPad 4th Gen      |
+| iOSTablet13Portrait      | 13" iPad           | 2064x2752  | iPad 13"          |
+| iOSTablet13Landscape     | 13" iPad           | 2752x2064  | iPad 13"          |
+| linux                    |                    | 1920x1080  | Laptop            |
+| macOS                    |                    | 1920x1080  | Laptop            |
+| windows                  |                    | 1920x1080  | Laptop            |
 
 ¹Incorrect frame but correct resolution
 

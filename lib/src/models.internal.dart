@@ -29,8 +29,8 @@ extension DeviceTypeExtensions on DeviceType {
       };
 
   DeviceInfo get frame => switch (this) {
-        DeviceType.androidPhonePortrait => Devices.android.onePlus8Pro,
-        DeviceType.androidPhoneLandscape => Devices.android.onePlus8Pro,
+        DeviceType.androidPhonePortrait => Devices.android.googlePixel9,
+        DeviceType.androidPhoneLandscape => Devices.android.googlePixel9,
         DeviceType.androidTablet7Portrait => Devices.android.mediumTablet,
         DeviceType.androidTablet7Landscape => Devices.android.mediumTablet,
         DeviceType.androidTablet10Portrait => Devices.android.largeTablet,
@@ -43,12 +43,12 @@ extension DeviceTypeExtensions on DeviceType {
           Devices.ios.iPhone13Mini, // should be iPhone 8 Plus, iPhone 7 Plus or iPhone 6s Plus
         DeviceType.iOSPhone65Portrait => Devices.ios.iPhone13ProMax,
         DeviceType.iOSPhone65Landscape => Devices.ios.iPhone13ProMax,
-        DeviceType.iOSPhone69Portrait => Devices.ios.iPhone13ProMax, // should be iPhone 16 Pro Max
-        DeviceType.iOSPhone69Landscape => Devices.ios.iPhone13ProMax, // should be iPhone 16 Pro Max
+        DeviceType.iOSPhone69Portrait => Devices.ios.iPhone16ProMax,
+        DeviceType.iOSPhone69Landscape => Devices.ios.iPhone16ProMax,
         DeviceType.iOSTablet129Portrait => Devices.ios.iPad12InchesGen4,
         DeviceType.iOSTablet129Landscape => Devices.ios.iPad12InchesGen4,
-        DeviceType.iOSTablet13Portrait => Devices.ios.iPad12InchesGen4, // should be iPad 13"
-        DeviceType.iOSTablet13Landscape => Devices.ios.iPad12InchesGen4, // should be iPad 13"
+        DeviceType.iOSTablet13Portrait => Devices.ios.iPadPro13InchesM4,
+        DeviceType.iOSTablet13Landscape => Devices.ios.iPadPro13InchesM4,
         DeviceType.linux => Devices.linux.laptop,
         DeviceType.macOS => Devices.macOS.macBookPro,
         DeviceType.windows => Devices.windows.laptop,
