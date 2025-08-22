@@ -110,7 +110,7 @@ See [example/test/app_store_screenshots/generate_screenshots_test.dart](example/
 
 ### App Icon
 
-Given an `AppIcon` widget, `generateAppIcon` and `generateAppIconAndroidForeground` can be used to generated 512x512 app icons and android foreground, while `generateAppIconMacOS` can be used to generate a 824x macOS app icon in a 1024x frame with rounded edges and shadows:
+Given an `AppIcon` widget, `generateAppIcon` generates a 512x512 app icon, `generateAppIconForegroundTint` & `generateAppIconForegroundTint` generate icon foregrounds, while `generateAppIconMacOS` can be used to generate a 824x macOS app icon in a 1024x frame with rounded edges and shadows:
 
 <table>
 <tr><td>
@@ -126,14 +126,27 @@ generateAppIcon(
 <td>
 
 ```dart
-generateAppIconAndroidForeground(
+generateAppIconForeground(
   onBuildIcon: (size) => AppIcon(
     size: size,
     hasTransparentBackground: true,
   ),
 );
 ```
-</td><td><img src="example/assets_dev/app_icons/android_icon_foreground.png" alt="image" width="64" height="auto"></td>
+</td><td><img src="example/assets_dev/app_icons/app_icon_foreground.png" alt="image" width="64" height="auto"></td>
+</tr>
+<td>
+
+```dart
+generateAppIconForegroundTint(
+  onBuildIcon: (size) => AppIcon(
+    size: size,
+    hasTransparentBackground: true,
+  ),
+  color: Colors.green,
+);
+```
+</td><td><img src="example/assets_dev/app_icons/app_icon_foreground_tint.png" alt="image" width="64" height="auto"></td>
 </tr>
 <td>
 
@@ -149,6 +162,8 @@ generateAppIconMacOS(
 </table>
 
 Icons can be found in [example/assets_dev/app_icons/](example/assets_dev/app_icons/). [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons) could then be used to update the launcher icons for targeted platforms.
+
+In case light & dark foregrounds differ, `generateAppIconForeground` can be run multiple times with different `filename`s.
 
 See [example/test/app_store_screenshots/generate_app_icons_test.dart](example/test/app_store_screenshots/generate_app_icons_test.dart) for full example.
 

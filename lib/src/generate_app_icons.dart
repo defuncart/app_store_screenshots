@@ -34,19 +34,22 @@ void generateAppIcon({
   );
 }
 
-/// Generates a 512x android app icon foreground saved to `assets_dev/app_icons`
+/// Generates a 512x app icon foreground saved to `assets_dev/app_icons`
 /// The resulting icon has a transparent background with optional [padding] around [onBuildIcon]
 /// In general [onBuildIcon] should also return an icon with transparent background
 @isTest
-void generateAppIconAndroidForeground({
+void generateAppIconForeground({
   required AppIconBuilder onBuildIcon,
+  String? filename,
   EdgeInsets? padding,
   bool? skip,
 }) {
   testGoldensWithShadows(
     () => testGoldens(
-      'Generate android icon foreground',
+      'Generate icon foreground',
       (tester) async {
+        final effectiveFilename = filename != null && filename.isNotEmpty ? filename : 'app_icon_foreground';
+
         await loadAppFonts();
 
         const size = Size(512, 512);
@@ -69,7 +72,7 @@ void generateAppIconAndroidForeground({
             ),
           ),
         );
-        await screenMatchesGolden(tester, 'app_icons/android_icon_foreground');
+        await screenMatchesGolden(tester, 'app_icons/$effectiveFilename');
 
         moveGoldens('app_icons', replaceAllFiles: false);
       },
@@ -77,6 +80,27 @@ void generateAppIconAndroidForeground({
     ),
   );
 }
+
+/// Generates a 512x app icon foreground tinted with [color] saved to `assets_dev/app_icons`
+/// The resulting icon has a transparent background with optional [padding] around [onBuildIcon]
+/// In general [onBuildIcon] should also return an icon with transparent background
+@isTest
+void generateAppIconForegroundTint({
+  required AppIconBuilder onBuildIcon,
+  Color color = Colors.white,
+  EdgeInsets? padding,
+  bool? skip,
+}) =>
+    generateAppIconForeground(
+      onBuildIcon: (size) => ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          color,
+          BlendMode.srcIn,
+        ),
+        child: onBuildIcon(size),
+      ),
+      filename: 'app_icon_foreground_tint',
+    );
 
 /// Generates a 824x macOS app icon in a 1024x frame with rounded edges and shadows saved to `assets_dev/app_icons`
 @isTest

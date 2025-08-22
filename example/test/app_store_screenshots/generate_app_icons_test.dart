@@ -8,11 +8,19 @@ void main() {
     ),
   );
 
-  generateAppIconAndroidForeground(
+  generateAppIconForeground(
     onBuildIcon: (size) => AppIcon(
       size: size,
       hasTransparentBackground: true,
     ),
+  );
+
+  generateAppIconForegroundTint(
+    onBuildIcon: (size) => AppIcon(
+      size: size,
+      hasTransparentBackground: true,
+    ),
+    color: Colors.green,
   );
 
   generateAppIconMacOS(
