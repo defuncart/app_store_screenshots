@@ -30,7 +30,7 @@ Widget createScreenContents({
 
 Widget createScreenshot({
   required ScreenshotBackground background,
-  String? text,
+  dynamic text,
   required ScreenshotForegroundOptions foregroundOptions,
   required Widget screenContents,
   required DeviceInfo deviceFrame,
@@ -56,8 +56,8 @@ Widget createScreenshot({
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                if (text != null && foregroundOptions.position.isTop) ...[
-                  Text(
+                if (foregroundOptions.position.isTop) ...[
+                  _LabelText(
                     text,
                     textAlign: foregroundOptions.textAlign,
                     style: foregroundOptions.textStyle,
@@ -92,9 +92,9 @@ Widget createScreenshot({
                     },
                   ),
                 ),
-                if (text != null && foregroundOptions.position.isBottom) ...[
+                if (foregroundOptions.position.isBottom) ...[
                   SizedBox(height: foregroundOptions.spacer),
-                  Text(
+                  _LabelText(
                     text,
                     textAlign: foregroundOptions.textAlign,
                     style: foregroundOptions.textStyle,
@@ -124,4 +124,33 @@ Future<void> takeScreenshot({
     await onPostPumped(tester);
   }
   await screenMatchesGolden(tester, name);
+}
+
+class _LabelText extends StatelessWidget {
+  const _LabelText(
+    this.text, {
+    this.textAlign,
+    this.style,
+  });
+
+  final dynamic text;
+  final TextAlign? textAlign;
+  final TextStyle? style;
+
+  @override
+  Widget build(BuildContext context) {
+    if (text != null) {
+      if (text is String) {
+        return Text(
+          text,
+          textAlign: textAlign,
+          style: style,
+        );
+      } else if (text is Widget) {
+        return text;
+      }
+    }
+
+    return const SizedBox.shrink();
+  }
 }
