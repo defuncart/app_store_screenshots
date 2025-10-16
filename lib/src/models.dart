@@ -43,17 +43,23 @@ enum DeviceType {
   /// iPhone 6.5" Orientation: Landscape
   iOSPhone65Landscape,
 
-  /// iPhone 6.7" Orientation: Portrait
-  iOSPhone67Portrait,
+  /// iPhone 6.9" Orientation: Portrait
+  iOSPhone69Portrait,
 
-  /// iPhone 6.7" Orientation: Landscape
-  iOSPhone67Landscape,
+  /// iPhone 6.9" Orientation: Landscape
+  iOSPhone69Landscape,
 
   /// iPad 12.9" Orientation: Portrait
   iOSTablet129Portrait,
 
   /// iPad 12.9" Orientation: Landscape
   iOSTablet129Landscape,
+
+  /// iPad 13" Orientation: Portrait
+  iOSTablet13Portrait,
+
+  /// iPad 13" Orientation: Landscape
+  iOSTablet13Landscape,
 
   /// Laptop running Linux
   linux,
@@ -65,11 +71,22 @@ enum DeviceType {
   windows,
 }
 
+/// Convenience sets of different device types
+sealed class DeviceTypes {
+  DeviceTypes._();
+
+  /// Mobile portrait (Android & iOS)
+  static const List<DeviceType> mobile = [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait];
+
+  /// Tablet landscape (Android & iOS)
+  static const List<DeviceType> tablet = [DeviceType.androidTablet10Landscape, DeviceType.iOSTablet13Landscape];
+}
+
 /// A base configuration used for all screenshots
 class ScreenshotsConfig {
   /// Supported device types
   ///
-  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone67Portrait, DeviceType.iOSPhone55Portrait]
+  /// Typically a subset, i.e. [DeviceType.androidPhonePortrait, DeviceType.iOSPhone69Portrait] or [DeviceTypes]
   ///
   /// See [DeviceType] for more info
   final Iterable<DeviceType> devices;

@@ -17,7 +17,7 @@ void main() {
 
   generateAppStoreScreenshots(
     config: ScreenshotsConfig(
-      devices: DeviceType.values,
+      devices: DeviceTypes.mobile,
       locales: AppLocalizations.supportedLocales,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       background: ScreenshotBackground.solid(
@@ -45,9 +45,9 @@ void main() {
           _ => throw ScreenshotUnsupportedLocale(locale),
         },
         foregroundOptions: const ScreenshotForegroundOptions.top(
-          padding: EdgeInsets.only(top: 64, left: 64, right: 64),
+          padding: EdgeInsets.only(top: 48, left: 48, right: 48),
           textStyle: textStyle,
-          deviceHeightPercentage: 0.75,
+          deviceHeightPercentage: 0.85,
         ),
         theme: darkTheme,
       ),
